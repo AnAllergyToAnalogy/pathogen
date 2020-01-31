@@ -1,9 +1,9 @@
-pragma solidity ^0.5.11;
+pragma solidity ^0.6.2;
 
 
 contract Pathogen721{
 
-    constructor(address _main) public{
+    constructor() public{
 
         supportedInterfaces[0x6466353c] = true;
         supportedInterfaces[0x780e9d63] = true;
@@ -18,12 +18,13 @@ contract Pathogen721{
     mapping (   uint    =>  uint)      STRAINS;
     mapping (address => uint)   IMMUNITY;
     //    mapping (address => uint)   coughs; //<token balance
-    mapping (address => uint)   DEATH_DATE;
+    mapping (address => uint)  DEATH_DATE;
     uint constant INFECTIOUSNESS = 3;
     uint constant STABILITY = 10;
 
     uint public LAST_INFECTION = 0;
 
+    uint public INFECTIONS = 0;
 
 
     //////===721 Standard
@@ -39,12 +40,12 @@ contract Pathogen721{
     mapping (address => mapping (address => bool)) internal AUTHORISED;
 
     //    uint[] PATHOGENS;
-    uint[] public PATHOGENS;                      //Array of all tickets [tokenId,tokenId,...]
-    mapping(uint256 => address) public OWNERS;  //Mapping of ticket owners
+    uint[] PATHOGENS;                      //Array of all tickets [tokenId,tokenId,...]
+    mapping(uint256 => address) OWNERS;  //Mapping of ticket owners
 
     //    METADATA VARS
-    string private __name = "Unstoppable Lottery Tickets";
-    string private __symbol = "ULT";
+    string private __name = "EtherVirus";
+    string private __symbol = "nEv";
     bytes private __uriBase = bytes("https://www.somedomain.com/tokenData/");
 
 
@@ -62,15 +63,41 @@ contract Pathogen721{
         uint death_date
     ){
         return (
-            isAlive(patient),
-            BALANCES[patient],
-            IMMUNITY[patient],
-            DEATH_DATE[patient]
+        isAlive(patient),
+        BALANCES[patient],
+        IMMUNITY[patient],
+        DEATH_DATE[patient]
         );
     }
 
     function isAlive(address patient) public view returns(bool){
         return (DEATH_DATE[patient] == 0 || DEATH_DATE[patient] > now);
+    }
+
+
+    function patientZero() public{
+        require(INFECTIONS == 0,"exists");
+        for(uint i = 0; i < INFECTIOUSNESS; i++){
+            issueToken(msg.sender,1);
+        }
+        DEATH_DATE[msg.sender] = now + 1 weeks;
+        INFECTIONS++;
+    }
+    function infectMe() public{
+        require(LAST_INFECTION + 1 weeks > now ,"extinct");
+        require(isAlive(msg.sender),"dead");
+        require(BALANCES[msg.sender] == 0,"sick");
+        INFECTIONS++;
+
+        uint strain = STRAINS[PATHOGENS[PATHOGENS.length-1]];
+        if(strain < IMMUNITY[msg.sender]){
+            strain = IMMUNITY[msg.sender] + 1;
+        }
+
+        for(uint i = 0; i < INFECTIOUSNESS; i++){
+            issueToken(msg.sender,strain);
+        }
+        DEATH_DATE[msg.sender] = now + 1 weeks;
     }
 
     function vaccinate(uint tokenId, uint vaccine) public{
@@ -153,11 +180,7 @@ contract Pathogen721{
         //transfer this token and mint 2 more the same
 
         uint strain = STRAINS[_tokenId];
-        if(block.timestamp % STABILITY == 0){
-            strain = strain + 3 - 2;
-        }else{
-            strain = strain + 3 - 3; //So gas cost is the same regardless
-        }
+        strain += (block.timestamp%STABILITY+1)/STABILITY;
 
         for(uint i = 0; i < INFECTIOUSNESS; i++){
             issueToken(victim,strain);
@@ -262,7 +285,9 @@ contract Pathogen721{
             //Update the token's reference to its place in the index list
             OWNER_ID_TO_INDEX[OWNER_INDEX_TO_ID[_from][oldIndex]] = oldIndex;
         }
-        OWNER_INDEX_TO_ID[_from].length--;
+        //OWNER_INDEX_TO_ID[_from].length--;
+        OWNER_INDEX_TO_ID[_from].pop();
+
         OWNER_ID_TO_INDEX[_tokenId] = OWNER_INDEX_TO_ID[_to].length;
         OWNER_INDEX_TO_ID[_to].push(_tokenId);
 
@@ -271,6 +296,8 @@ contract Pathogen721{
 
         if(BALANCES[_from] == 0 ){
             DEATH_DATE[_from] += 52000 weeks;
+        }else{
+            INFECTIONS++;
         }
 
     }
@@ -433,4 +460,18 @@ interface ERC721TokenReceiver {
     /// @return `bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"))`
     ///  unless throwing
     function onERC721Received(address _operator, address _from, uint256 _tokenId, bytes calldata _data) external returns(bytes4);
+}
+
+contract ValidReceiver is ERC721TokenReceiver{
+    function onERC721Received(address _operator, address _from, uint256 _tokenId, bytes calldata _data) override external returns(bytes4){
+        _operator;_from;_tokenId;_data;
+        return bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"));
+    }
+}
+
+contract InvalidReceiver is ERC721TokenReceiver{
+    function onERC721Received(address _operator, address _from, uint256 _tokenId, bytes calldata _data) override external returns(bytes4){
+        _operator;_from;_tokenId;_data;
+        return bytes4(keccak256("suck it nerd"));
+    }
 }

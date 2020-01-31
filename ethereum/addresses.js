@@ -1,0 +1,5 @@
+module.exports = { 
+	Pathogen721:'0x35A3F59FB6627981C753F7C69999e9aD43421007', 
+	ValidReceiver:'0x63Edd71dde54617acd92f60a39075ddB63BF03D3', 
+	InvalidReceiver:'0xb9463A1dc685816758Da8df73c8067D15e17A397', 
+};

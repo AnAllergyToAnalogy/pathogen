@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Test</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.2.0/dist/web3.min.js" crossorigin="anonymous"></script>
+    <script src="frontend/js/Compiled.js"></script>
+    <script src="frontend/js/Instance.js"></script>
+    <script src="frontend/js/Contract.js"></script>
+<!--    <script src="frontend/js/Game.js"></script>-->
+
+</head>
+<body>
+
+<h1>Test</h1>
+
+</body>
+<script>
+    const provider_fallback = "http://127.0.0.1:8545";
+
+    let instance = new Instance(provider_fallback);
+    let contract = new Contract(instance,0);
+    // let game = new Game(contract,0);
+
+    //
+    // contract.transactions.enter.submit = (data)=>{
+    //     console.log("Submit enter",data);
+    // }
+    // contract.transactions.enter.success = (data)=>{
+    //     console.log("Success enter",data);
+    // }
+
+</script>
+</html>

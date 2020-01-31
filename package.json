@@ -1,0 +1,26 @@
+{
+  "name": "pathogen",
+  "version": "1.0.0",
+  "description": "\"# pathogen\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnAllergyToAnalogy/pathogen.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnAllergyToAnalogy/pathogen/issues"
+  },
+  "homepage": "https://github.com/AnAllergyToAnalogy/pathogen#readme",
+  "dependencies": {
+    "ganache-cli": "^6.9.0",
+    "mocha": "^7.0.1",
+    "solc": "^0.6.2",
+    "truffle-hdwallet-provider": "^1.0.17",
+    "web3": "^1.2.5"
+  }
+}

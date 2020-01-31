@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="58c121b9-a2dc-4ab6-9145-6c4b862e667a" name="Default Changelist" comment="" />
+    <list default="true" id="58c121b9-a2dc-4ab6-9145-6c4b862e667a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ethereum/addresses.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ethereum/build.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ethereum/contracts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ethereum/deploy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ethereum/do_deploy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ethereum/fund.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ethereum/provider.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/js/Compiled.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/js/Contract.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/js/Game.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/js/Instance.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fund.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ethereum/contracts/Pathogen721.sol" beforeDir="false" afterPath="$PROJECT_DIR$/ethereum/contracts/Pathogen721.sol" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,13 +32,17 @@
       <executable />
     </execution>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="eWmHhsjt" />
   </component>
   <component name="ProjectId" id="1X79makgK52JWjiw6srC6tz2cLO" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/js" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -28,6 +51,14 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\miste\Documents\Solidity\pathogen\frontend\js" />
+      <recent name="C:\Users\miste\Documents\Solidity\pathogen" />
+      <recent name="C:\Users\miste\Documents\Solidity\pathogen\ethereum" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -51,11 +82,26 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1580386425406</updated>
-      <workItem from="1580386426654" duration="6892000" />
+      <workItem from="1580386426654" duration="7450000" />
+      <workItem from="1580433429341" duration="2872000" />
+      <workItem from="1580457486512" duration="11412000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
