@@ -121,7 +121,19 @@ class Site {
         let G = this.game;
         let site = this;
 
+        let log = "";
+        function dev_log(data){
+            log += data +" \r\n";
+        }
+
         function do_refresh_page(){
+            log = "";
+            dev_log("me:"+site.game.me.loaded+","+site.game.me.failed);
+            dev_log("me:"+site.game.stats.loaded);
+            _.ById("dev").SetText(log);
+
+
+
             // if(!site.game.me.loaded
             //     && site.game.contract.isUnlocked()
             //     && !site.game.me.failed
