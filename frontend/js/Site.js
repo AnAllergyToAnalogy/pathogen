@@ -64,19 +64,19 @@ class Site {
             }else if(seconds < 60){
                 return seconds+" seconds"
             }
-            let minutes = Math.floor(seconds/60);
+            let minutes = Math.round(seconds/60);
             if(minutes === 1){
                 return "1 minute";
             }else if(minutes < 60){
                 return minutes+" minutes";
             }
-            let hours = Math.floor(minutes/60);
+            let hours = Math.round(minutes/60);
             if(hours === 1) {
                 return "1 hour";
             }else if(hours < 24){
                 return hours+" hours";
             }
-            let days = Math.floor(hours/24);
+            let days = Math.round(hours/24);
             if(days === 1){
                 return "1 day";
             }else{
