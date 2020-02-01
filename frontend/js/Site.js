@@ -46,11 +46,45 @@ class Site {
     }
     format_future_death_date(death_date){
         //todo this
-        return death_date;
+        return this.format_seconds_from_now(death_date);
     }
     format_past_death_date(death_date){
         //todo this
-        return death_date;
+        return this.format_seconds_from_now(death_date);
+    }
+
+    format_seconds_from_now(date_seconds){
+        if(this.game.now.loaded === "loaded"){
+            let now = this.game.now.now;
+
+            let seconds = Math.abs(date_seconds - now);
+
+            if(seconds === 1){
+                return "1 second";
+            }else if(seconds < 60){
+                return seconds+" seconds"
+            }
+            let minutes = Math.floor(seconds/60);
+            if(minutes === 1){
+                return "1 minute";
+            }else if(minutes < 60){
+                return minutes+" minutes";
+            }
+            let hours = Math.floor(minutes/60);
+            if(hours === 1) {
+                return "1 hour";
+            }else if(hours < 24){
+                return hours+" hours";
+            }
+            let days = Math.floor(hours/24);
+            if(days === 1){
+                return "1 day";
+            }else{
+                return days+" days";
+            }
+        }else{
+            return "a while";
+        }
     }
 
     init_page(){

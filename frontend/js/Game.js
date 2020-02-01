@@ -6,6 +6,11 @@ class Game{
 
         this.address_zero = "0x0000000000000000000000000000000000000000";
 
+        this.now = {
+            loaded: false,
+            failed: false,
+            now: 0
+        },
         this.stats = {
             loaded: false,
 
@@ -94,6 +99,12 @@ class Game{
         });
 
 
+        this.get_now().catch(e => {
+            console.log("failed to get now");
+        }).then(()=>{
+           console.log("got now");
+        });
+
         this.init_event_hooks();
         this.init_transaction_hooks();
         this.process_past_transfer_data();
@@ -149,6 +160,17 @@ class Game{
     }
     trigger_infection(victim,vector){
         //External
+    }
+
+    async get_now(){
+        this.now.loaded = "loading";
+        try{
+            this.now.now = Number(await this.contract.get_now());
+        }catch(e){
+            this.now.loaded = false;
+            this.now.failed = true;
+        }
+        this.now.loaded = "loaded";
     }
 
     process_data(from,to,tokenId,block_number){
