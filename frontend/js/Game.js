@@ -123,6 +123,8 @@ class Game{
             if(tokenIds.includes(tokenId)){
                 tokenIds.splice(tokenIds.indexOf(tokenId),1);
             }
+            this.me.pathogens--;
+
         }
         if(this.is_same_address(
             to,
@@ -131,15 +133,21 @@ class Game{
             //me infected
             this.refresh_me();
         }
-        this.process_infection(to);
+        this.process_infection(to,from);
         this.process_data(from,to,tokenId,block_number);
     }
-    process_infection(vector,victim){
+    process_infection(victim,vector){
         if(!Boolean(this.data[victim]) || this.data[victim].balance === 0){
-            this.trigger_infection(vector,victim);
+            if(this.is_same_address(
+                vector,
+                this.address_zero
+            )){
+                vector = 0;
+            }
+            this.trigger_infection(victim,vector);
         }
     }
-    trigger_infection(vector,victim){
+    trigger_infection(victim,vector){
         //External
     }
 

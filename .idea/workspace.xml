@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58c121b9-a2dc-4ab6-9145-6c4b862e667a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/css/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/js/FuckFrameworks.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/js/Site.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ethereum/build/Pathogen721.json" beforeDir="false" afterPath="$PROJECT_DIR$/ethereum/build/Pathogen721.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ethereum/contracts/Pathogen721.sol" beforeDir="false" afterPath="$PROJECT_DIR$/ethereum/contracts/Pathogen721.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/js/Compiled.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/Compiled.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/js/Contract.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/Contract.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/js/Game.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/Game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/js/Instance.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/Instance.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/js/Site.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/Site.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -78,7 +72,7 @@
       <workItem from="1580386426654" duration="7450000" />
       <workItem from="1580433429341" duration="2872000" />
       <workItem from="1580457486512" duration="11490000" />
-      <workItem from="1580519630857" duration="41536000" />
+      <workItem from="1580519630857" duration="43476000" />
     </task>
     <servers />
   </component>

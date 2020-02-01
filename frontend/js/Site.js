@@ -17,10 +17,22 @@ class Site {
         this.init_page();
         this.init_hooks();
 
-        this.game.trigger_infection = (vector,victim) => {
-
+        this.game.trigger_infection = (victim,vector) => {
+            this.display_new_infection(victim,vector);
         }
     }
+
+
+    display_new_infection(victim,vector){
+        victim = victim.substring(0,7)+"...";
+        if(!vector){
+            _.ById("ticker").SetText(victim+" became infected.");
+        }else{
+            vector = vector.substring(0,7)+"...";
+            _.ById("ticker").SetText(vector+" infected "+victim);
+        }
+    }
+
 
     format_strain(strain_number){
         return "2020-nEthV-"+strain_number;
@@ -70,7 +82,6 @@ class Site {
         }
 
     }
-
     refresh_page(){
         let G = this.game;
         let site = this;
@@ -193,6 +204,9 @@ class Site {
                         break;
 
                 }
+                if(G.coughs[i].checking){
+                    message = "Checking victim...";
+                }
                 _.ById("readout-infect-"+i).SetText(message);
             }
 
@@ -202,17 +216,9 @@ class Site {
         do_refresh_page();
     }
 
+
+
     init_hooks(){
-        // const site = this;
-        // //Hooks
-        // site.contract.transactions.infectMe.submit = function(data){
-        //
-        // }
-        // site.contract.transactions.infectMe.success = function(data){
-        //     site.game.refresh_me();
-        // }
-        // site.contract.transactions.infectMe.fail =function(data){
-        //
-        // }
+
     }
 }

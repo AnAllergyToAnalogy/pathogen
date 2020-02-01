@@ -75,6 +75,14 @@ header{
 #unlock-status{
 
 }
+#button-unlock{
+    color: deepskyblue;
+}
+#button-unlock:hover{
+    color: aqua;
+}
+
+
 
 .button-infect{
     padding:5px;
@@ -181,6 +189,7 @@ header{
 
 /*FOOTER*/
 footer{
+    text-align: center;
     padding-top: 5px;
     color:white;
     background-color: rgb(200,20,20);
@@ -191,6 +200,7 @@ footer{
     position:absolute;
     bottom:0;
     width:100%;
+    font-size: 14px;
 }
 footer section{
     display: flex;
