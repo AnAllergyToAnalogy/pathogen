@@ -5,36 +5,141 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Test</title>
+    <title>Ethervirus 2020-nEthV</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="frontend/js/FuckFrameworks.js"></script>
+
 
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.2.0/dist/web3.min.js" crossorigin="anonymous"></script>
     <script src="frontend/js/Compiled.js"></script>
     <script src="frontend/js/Instance.js"></script>
     <script src="frontend/js/Contract.js"></script>
-<!--    <script src="frontend/js/Game.js"></script>-->
+    <script src="frontend/js/Game.js"></script>
+    <script src="frontend/js/Site.js"></script>
 
+    <link rel="stylesheet" href="frontend/css/main.css">
 </head>
 <body>
 
-<h1>Test</h1>
+<header class="header">
+    <span class="header-title">EtherVirus</span>
+</header>
+
+<section class="statistics">
+    <div>Infections:    <span id="readout-infections">1230</span></div>
+    <div>Deaths:        <span id="readout-deaths">123</span></div>
+</section>
+
+<section class="unlock" >
+    <a href="" id="button-unlock">Unlock account</a>
+    <span id="unlock-status"></span>
+</section>
+
+<section id="my-data">
+    <section class="data-me" id="me-infected">
+        <div class="you-are">You are</div>
+        <div class="status-me status-infected">INFECTED</div>
+        <div class="status-details"> with strain</div>
+        <div id="infected-strain">2020-nEthV-1</div>
+
+        <p>
+            <div class="status-details">You will die in
+                <span id="infected-death-date">15 hours</span>
+                unless you cough on
+                <span id="infected-cough-count">2 more people</span>.
+            </div>
+        </p>
+
+
+        <section>
+            <div class="status-details">Cough on people...</div>
+            <div class="infector" id="infector-0">
+                <div class="infector-controls">
+                    <input
+                        class="input-infect"
+                            id="input-infect-0" type="text"
+                        placeholder="Address to cough on"
+                    >
+                    <a href="" class="button-infect" id="button-check-0">Infect</a>
+                    <a href="" class="button-infect" id="button-infect-0">Confirm</a>
+                </div>
+                <div class="readout-infect" id="readout-infect-0">
+                    status
+                </div>
+            </div>
+            <div class="infector" id="infector-1">
+                <div class="infector-controls">
+                    <input class="input-infect"
+                           id="input-infect-1" type="text"
+                           placeholder="Address to cough on"
+                    >
+                    <a class="button-infect" id="button-check-1">Infect</a>
+                    <a class="button-infect" id="button-infect-1">Confirm</a>
+                </div>
+                <div class="readout-infect" id="readout-infect-1">
+                    status
+                </div>
+            </div>
+            <div class="infector" id="infector-2">
+                <div class="infector-controls">
+                    <input class="input-infect"
+                            id="input-infect-2" type="text"
+                           placeholder="Address to cough on"
+                    >
+                    <a class="button-infect" id="button-check-2">Infect</a>
+                    <a class="button-infect" id="button-infect-2">Confirm</a>
+                </div>
+                <div class="readout-infect" id="readout-infect-2">
+                    status
+                </div>
+            </div>
+        </section>
+
+    </section>
+    <section  class="data-me" id="me-dead">
+        <div class="you-are">You are</div>
+        <div class="status-me status-dead">DEAD</div>
+
+        <div id="dead-death-date">You died on 20/20/20</div>
+        <div>from strain</div>
+        <div id="dead-strain">2020-nEthV-1</div>
+    </section>
+
+    <section class="data-me" id="me-healthy">
+        <div class="you-are">You are</div>
+        <div class="status-me status-healthy">HEALTHY</div>
+
+        <div class="status-details">Hopefully you stay that way, but we found this pile of discarded tissues from some sick people. You can have them if you want.</div>
+
+        <section>
+            <a href="" id="button-infectMe">Infect Me</a>
+            <div class="transaction-message" id="message-infectMe">status</div>
+        </section>
+
+    </section>
+
+</section>
+
+
+
+
+
+
+<footer class="ticker">
+    <div>0x123... infected 0xABC</div>
+</footer>
 
 </body>
 <script>
     const provider_fallback = "http://127.0.0.1:8545";
 
-    let instance = new Instance(provider_fallback);
-    let contract = new Contract(instance,0);
-    // let game = new Game(contract,0);
+    // let instance = new Instance(provider_fallback);
+    // let contract = new Contract(instance);
+    // let game = new Game(contract);
+    let site = new Site();
 
-    //
-    // contract.transactions.enter.submit = (data)=>{
-    //     console.log("Submit enter",data);
-    // }
-    // contract.transactions.enter.success = (data)=>{
-    //     console.log("Success enter",data);
-    // }
 
 </script>
 </html>

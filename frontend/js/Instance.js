@@ -7,7 +7,7 @@ class Instance {
         //addresses: {Main}
         this.provider_fallback = provider_fallback;
         this.addresses = {
-            Main: "0x5E2A5f9e91FE7c1a28A6d33cbF63eA52b4B4618c",
+            Main: "0x95944D80D73f2785d6bB645A86F5f59bB65970dD",
         }
 
 

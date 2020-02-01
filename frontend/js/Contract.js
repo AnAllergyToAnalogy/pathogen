@@ -1,5 +1,5 @@
 class Contract{
-    constructor(instances,referralId){
+    constructor(instances) {
         this.account = null;
         this.instances = instances;
 
@@ -8,49 +8,49 @@ class Contract{
         this.update_networkId();
 
 
-
         this.Main = this.instances.Main.methods;
         this.pending_transactions = 0;
         this.events = {
             Transfer: {
-                hook: (returnValues)=>{},
+                hook: (returnValues,block_number) => {
+                },
                 funcs: [
-                    // "transferFrom",
-                    // "infectMe",
-                    // "patientZero",
+                    "transferFrom",
+                    "infectMe",
+                    "patientZero",
                 ]
             },
         }
         this.transactions = {
-            patientZero:{
+            patientZero: {
                 // events: events,
                 pending: {},
                 submit: null,       //Tx submitted
                 success: null,      //Tx successful
                 fail: null,         //Tx failed
             },
-            infectMe:{
+            infectMe: {
                 // events: events,
                 pending: {},
                 submit: null,       //Tx submitted
                 success: null,      //Tx successful
                 fail: null,         //Tx failed
             },
-            vaccinate:{
+            vaccinate: {
                 // events: events,
                 pending: {},
                 submit: null,       //Tx submitted
                 success: null,      //Tx successful
                 fail: null,         //Tx failed
             },
-            setApprovalForAll:{
+            setApprovalForAll: {
                 // events: events,
                 pending: {},
                 submit: null,       //Tx submitted
                 success: null,      //Tx successful
                 fail: null,         //Tx failed
             },
-            transferFrom:{
+            transferFrom: {
                 // events: events,
                 pending: {},
                 submit: null,       //Tx submitted
@@ -62,6 +62,14 @@ class Contract{
         this.subscribe_to_events();
         this.init_account_monitor();
         this.init_network_monitor();
+        this.init_unlock();
+    }
+
+    async init_unlock(){
+        let alreadyUnlocked = await this.isAlreadyUnlocked();
+        if(alreadyUnlocked){
+            this.unlock();
+        }
     }
 
     subscribe_to_events(){
@@ -78,14 +86,19 @@ class Contract{
             if(!log_event(evt)) return false;
             console.log('Event, Main');
             console.log(evt);
-            this.trigger_event(evt.event,evt.transactionHash,evt.returnValues);
+            this.trigger_event(evt.event,evt.transactionHash,evt.returnValues,evt.id,evt.blockNumber);
         });
-
     }
-    trigger_event(event_name,txHash,returnValues){
-        if(this.pending_transactions === 0) return;
+
+    async get_past_transfers(){
+        // this.instances.Main.getPastEvents("allEvents")
+        return await this.instances.Main.getPastEvents("Transfer",{fromBlock:1});
+    }
+
+    trigger_event(event_name,txHash,returnValues,log_id,block_number){
         console.log(">>",event_name);
-        this.events[event_name].hook(returnValues);
+        this.events[event_name].hook(returnValues,block_number);
+        if(this.pending_transactions === 0) return;
         const funcs = this.events[event_name].funcs;
         for(let f = 0; f < funcs.length; f++){
             const tx = this.transactions[funcs[f]];
@@ -102,6 +115,7 @@ class Contract{
 
     }
 
+
     init_network_monitor(){
         if(window.ethereum && window.ethereum.on){
             window.ethereum.on('chainChanged', chainId => {
@@ -117,11 +131,12 @@ class Contract{
 
 
     init_account_monitor(){
+        let contract = this;
         if(window.ethereum && window.ethereum.on) {
             window.ethereum.on('accountsChanged', async (accounts) => {
-                console.log('accounts changed');
-                if(!this.account) return;
+                if(!contract.account) return;
                 await this.unlock();
+                this.trigger_new_account();
             });
         }
     }
@@ -131,13 +146,6 @@ class Contract{
             console.log('got accounts');
             if(accounts[0]){
                 this.account = accounts[0];
-                if(this.referralId){
-                    const referral = await this.get_REFERRAL(this.referralId).call();
-                    if(referral.referrer === this.account){
-                        // this.add_transactions_referrer();
-                        console.log('referrals unlocked');
-                    }
-                }
             }
         }catch(e){
             console.log('get accounts fail');
@@ -158,11 +166,18 @@ class Contract{
             }else{
                 await this.get_accounts();
             }
+            this.trigger_new_account();
             return true;
         }catch(e){
             console.log('denied, not unlocked');
             return false;
         }
+    }
+    trigger_new_account(){
+        //pass upwards
+    }
+    async isAlreadyUnlocked(){
+        return (await web3.eth.getAccounts()).length > 0;
     }
     isUnlocked(){
         return Boolean(this.account);
@@ -174,7 +189,13 @@ class Contract{
 
 
     //== GET ==
-    async get_STRAINS(tokenID){
+    async get_now(){
+        return await this.Main.get_now().call();
+    }
+    async get_block_number(){
+        return await this.Main.get_block_number().call();
+    }
+    async get_STRAIN(tokenID){
         return await this.Main.STRAINS(tokenID).call();
     }
     async get_LAST_INFECTION(){
@@ -184,6 +205,14 @@ class Contract{
         return await this.Main.INFECTIONS().call();
     }
 
+    async canInfect(vector,victim,tokenId){
+        try{
+            return await this.Main.canInfect(vector,victim,tokenId).call();
+        }catch(e){
+            return "error";
+        }
+
+    }
     async vitalSigns(patient){
         return await this.Main.vitalSigns(patient).call();
     }
@@ -313,6 +342,7 @@ class Contract{
         return this.txMain(data,'setApprovalForAll');
     }
     async transferFrom(from,to,tokenId){
+        console.log('transferFrom',from,to,tokenId);
         let data = this.Main.transferFrom(from,to,tokenId);
         return this.txMain(data,'transferFrom');
     }

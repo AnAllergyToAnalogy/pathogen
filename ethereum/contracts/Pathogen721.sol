@@ -75,6 +75,12 @@ contract Pathogen721{
     }
 
 
+    function get_now() public view returns (uint){
+        return now;
+    }
+    function get_block_number() public view returns(uint){
+        return block.number;
+    }
     function patientZero() public{
         require(INFECTIONS == 0,"exists");
         for(uint i = 0; i < INFECTIOUSNESS; i++){
@@ -82,6 +88,9 @@ contract Pathogen721{
         }
         DEATH_DATE[msg.sender] = now + 1 weeks;
         INFECTIONS++;
+
+        IMMUNITY[msg.sender] = 1;
+        LAST_INFECTION = now;
     }
     function infectMe() public{
         require(LAST_INFECTION + 1 weeks > now ,"extinct");
@@ -98,6 +107,9 @@ contract Pathogen721{
             issueToken(msg.sender,strain);
         }
         DEATH_DATE[msg.sender] = now + 1 weeks;
+
+        IMMUNITY[msg.sender] = strain;
+        LAST_INFECTION = now;
     }
 
     function vaccinate(uint tokenId, uint vaccine) public{
@@ -163,7 +175,15 @@ contract Pathogen721{
         emit Transfer(address(0),owner,tokenId);
     }
 
-
+    function canInfect(address vector, address victim, uint _tokenId) public view returns(string memory){
+        if(victim.balance == 0) return "victim_inactive";
+        if(DEATH_DATE[victim] > 0 && now >= DEATH_DATE[victim]) return "victim_dead";
+        if(STRAINS[_tokenId] <= IMMUNITY[victim]) return "victim_immune";
+        if(BALANCES[victim] > 0)    return "victim_sick";
+        if(now >= DEATH_DATE[vector]) return "vector_dead";
+        if(BALANCES[vector] == 0) return "vector_healthy";
+        return "okay";
+    }
 
     function infect(address vector, address victim, uint _tokenId) internal{
         require(victim.balance > 0,"victim_inactive");
@@ -182,7 +202,7 @@ contract Pathogen721{
         uint strain = STRAINS[_tokenId];
         strain += (block.timestamp%STABILITY+1)/STABILITY;
 
-        for(uint i = 0; i < INFECTIOUSNESS; i++){
+        for(uint i = 0; i < INFECTIOUSNESS-1; i++){
             issueToken(victim,strain);
         }
         IMMUNITY[victim] = strain;
@@ -250,6 +270,8 @@ contract Pathogen721{
     /// @param _to The new owner
     /// @param _tokenId The NFT to transfer
     function transferFrom(address _from, address _to, uint256 _tokenId) public {
+        infect(_from, _to,  _tokenId);
+
         //Check Transferable
         //There is a token validity check in ownerOf
         address owner = ownerOf(_tokenId);
@@ -290,8 +312,6 @@ contract Pathogen721{
 
         OWNER_ID_TO_INDEX[_tokenId] = OWNER_INDEX_TO_ID[_to].length;
         OWNER_INDEX_TO_ID[_to].push(_tokenId);
-
-        infect(_from, _to,  _tokenId);
 
 
         if(BALANCES[_from] == 0 ){
