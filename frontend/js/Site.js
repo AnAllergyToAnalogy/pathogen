@@ -1,7 +1,8 @@
 class Site {
     constructor() {
         var site = this;
-        const provider_fallback = "http://127.0.0.1:8545";
+        // const provider_fallback = "http://127.0.0.1:8545";
+        const provider_fallback = "https://rinkeby.infura.io/v3/2d9d3459d7ef4188a43973a98b27cef7";
 
         let instance = new Instance(provider_fallback);
         let contract = new Contract(instance);
@@ -136,7 +137,7 @@ class Site {
                 _.ById("readout-deaths").SetText("---");
             }
 
-            _.ById("button-unlock").Show(!G.contract.isUnlocked());
+            _.ById("button-unlock").Show(!G.contract.isUnlocked() && G.contract.instances.injected);
 
 
             _.ById("my-data").Show(G.contract.isUnlocked() && G.me.loaded === "loaded");

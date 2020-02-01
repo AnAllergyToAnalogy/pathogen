@@ -177,6 +177,8 @@ class Contract{
         //pass upwards
     }
     async isAlreadyUnlocked(){
+        if(!this.instances.injected) return false;
+
         return (await web3.eth.getAccounts()).length > 0;
     }
     isUnlocked(){
