@@ -129,7 +129,11 @@ class Site {
         function do_refresh_page(){
             log = "";
             dev_log("me:"+site.game.me.loaded+","+site.game.me.failed);
-            dev_log("me:"+site.game.stats.loaded);
+            dev_log("stats:"+site.game.stats.loaded);
+            dev_log("injected:"+site.game.contract.instances.injected);
+            dev_log("window.ethereum:"+window.ethereum);
+            dev_log("window.web3:"+window.web3);
+            dev_log("window.web3.currrentProvider:"+window.web3.currentProvider);
             _.ById("dev").SetText(log);
 
 
