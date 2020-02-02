@@ -5,6 +5,10 @@ class Site {
         const provider_fallback = "https://rinkeby.infura.io/v3/2d9d3459d7ef4188a43973a98b27cef7";
 
         let instance = new Instance(provider_fallback);
+
+        return;
+
+
         let contract = new Contract(instance);
         this.contract = contract;
 
@@ -121,20 +125,10 @@ class Site {
         let G = this.game;
         let site = this;
 
-        let log = "";
-        function dev_log(data){
-            log += data +" \r\n";
-        }
+
 
         function do_refresh_page(){
-            log = "";
-            dev_log("me:"+site.game.me.loaded+","+site.game.me.failed);
-            dev_log("stats:"+site.game.stats.loaded);
-            dev_log("injected:"+site.game.contract.instances.injected);
-            dev_log("window.ethereum:"+window.ethereum);
-            dev_log("window.web3:"+window.web3);
-            dev_log("window.web3.currrentProvider:"+window.web3.currentProvider);
-            _.ById("dev").SetText(log);
+
 
 
 

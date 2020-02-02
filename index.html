@@ -135,8 +135,31 @@ DEV
 </footer>
 
 </body>
+
+<script>
+    function log_clear(){
+        _.ById("dev").SetText("");
+    }
+    function log(data){
+        _.ById("dev").SetText(
+            _.ById("dev").innerText +
+            data +" \r\n"
+        );
+    }
+
+
+</script>
+
 <script>
     let site = new Site();
+
+    log_clear();
+    log("me:"+site.game.me.loaded+","+site.game.me.failed);
+    log("stats:"+site.game.stats.loaded);
+    log("injected:"+site.game.contract.instances.injected);
+    log("window.ethereum:"+window.ethereum);
+    log("window.web3:"+window.web3);
+    log("window.web3.currrentProvider:"+window.web3.currentProvider);
 
     //
     // _.ById("dev").SetText('fuck frameworks');
