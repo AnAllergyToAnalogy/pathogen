@@ -6,7 +6,6 @@ class Site {
 
         let instance = new Instance(provider_fallback);
 
-        return;
 
 
         let contract = new Contract(instance);
