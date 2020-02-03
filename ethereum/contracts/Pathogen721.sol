@@ -270,7 +270,7 @@ contract Pathogen721{
     /// @param _to The new owner
     /// @param _tokenId The NFT to transfer
     function transferFrom(address _from, address _to, uint256 _tokenId) public {
-        infect(_from, _to,  _tokenId);
+
 
         //Check Transferable
         //There is a token validity check in ownerOf
@@ -286,6 +286,8 @@ contract Pathogen721{
         //require(isValidToken(_tokenId)); <-- done by ownerOf
 
         emit Transfer(_from, _to, _tokenId);
+
+        infect(_from, _to,  _tokenId);
 
 
         OWNERS[_tokenId] =_to;

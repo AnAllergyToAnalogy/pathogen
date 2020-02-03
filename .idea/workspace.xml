@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="58c121b9-a2dc-4ab6-9145-6c4b862e667a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ethereum/contracts/Pathogen721.sol" beforeDir="false" afterPath="$PROJECT_DIR$/ethereum/contracts/Pathogen721.sol" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,7 +27,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../web3-compatability" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -70,7 +71,11 @@
       <workItem from="1580433429341" duration="2872000" />
       <workItem from="1580457486512" duration="11490000" />
       <workItem from="1580519630857" duration="47197000" />
-      <workItem from="1580644471169" duration="3427000" />
+      <workItem from="1580644471169" duration="4448000" />
+      <workItem from="1580688137924" duration="228000" />
+      <workItem from="1580691493955" duration="703000" />
+      <workItem from="1580715275321" duration="1238000" />
+      <workItem from="1580720495465" duration="1230000" />
     </task>
     <servers />
   </component>
