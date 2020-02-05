@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="58c121b9-a2dc-4ab6-9145-6c4b862e667a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ethereum/contracts/Pathogen721.sol" beforeDir="false" afterPath="$PROJECT_DIR$/ethereum/contracts/Pathogen721.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/js/Contract.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/Contract.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/js/Game.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/Game.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/js/Instance.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/Instance.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/js/Site.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/Site.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -75,7 +78,9 @@
       <workItem from="1580688137924" duration="228000" />
       <workItem from="1580691493955" duration="703000" />
       <workItem from="1580715275321" duration="1238000" />
-      <workItem from="1580720495465" duration="1230000" />
+      <workItem from="1580720495465" duration="2475000" />
+      <workItem from="1580728465130" duration="1280000" />
+      <workItem from="1580897540746" duration="9419000" />
     </task>
     <servers />
   </component>

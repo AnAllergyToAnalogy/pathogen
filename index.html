@@ -25,104 +25,118 @@
     <span class="header-title">EtherVirus</span>
 </header>
 
-<section class="statistics">
-    <div>Infections:    <span id="readout-infections">1230</span></div>
-    <div>Deaths:        <span id="readout-deaths">123</span></div>
+<section id="prompt-loading">
+    Loading...
+</section>
+<section id="prompt-network">
+    Please switch to the Rinkeby network.
 </section>
 
-<section class="unlock" >
-    <a href="" id="button-unlock">Unlock account</a>
-    <span id="unlock-status"></span>
-</section>
+<section class="main" id="section-main">
+    <section class="info-bar">
+        <section class="statistics">
+            <div>Infections:    <span id="readout-infections">1230</span></div>
+            <div>Deaths:        <span id="readout-deaths">123</span></div>
+        </section>
+        <section class="info-me">
+            <div id="info-me-status">
+                You are
+                <span id="info-me-status-healthy">HEALTHY</span>
+                <span id="info-me-status-infected">INFECTED</span>
+                <span id="info-me-status-dead">DEAD</span>
+            </div>
+            <div id="info-me-unlock">
+                Unlock
+            </div>
+        </section>
+    </section>
 
-<section id="my-data">
-    <section class="data-me" id="me-infected">
-        <div class="you-are">You are</div>
-        <div class="status-me status-infected">INFECTED</div>
-        <div class="status-details"> with strain</div>
-        <div id="infected-strain">2020-nEthV-1</div>
 
-        <p>
+    <section class="graph">
+
+    </section>
+
+    <section class="info-main">
+        A virus has emerged on the Ethereum mainnet, spreading fear and panic across the blockchain.
+    </section>
+
+    <section id="section-unlock" class="unlock" >
+        <a href="" id="button-unlock">Unlock account to see if you're okay</a>
+        <span id="unlock-status"></span>
+    </section>
+
+    <section id="my-data">
+        <section id="me-loading">Loading your data...</section>
+        <section class="data-me" id="me-infected">
+            <div class="you-are">You are</div>
+            <div class="status-me status-infected">INFECTED</div>
+            <div class="status-details"> with strain</div>
+            <div id="infected-strain">2020-nEthV-1</div>
+
             <div class="status-details">You will die in
                 <span id="infected-death-date">15 hours</span>
                 unless you cough on
                 <span id="infected-cough-count">2 more people</span>.
             </div>
-        </p>
+
+            <div id="infected-infected-by">
+                You were infected by 0x1234567
+            </div>
 
 
-        <section>
-            <div class="status-details">Cough on people...</div>
-            <div class="infector" id="infector-0">
-                <div class="infector-controls">
-                    <input
-                        class="input-infect"
-                            id="input-infect-0" type="text"
-                        placeholder="Address to cough on"
-                    >
-                    <a href="" class="button-infect" id="button-check-0">Infect</a>
-                    <a href="" class="button-infect" id="button-infect-0">Confirm</a>
+                <div class="status-details">Infect someone</div>
+                <div class="infector">
+                    <div class="infector-controls">
+                        <input
+                                class="input-infect"
+                                id="input-infect" type="text"
+                                placeholder="Address or ENS name"
+                        >
+                        <a href="" class="button-infect" id="button-check">Infect</a>
+                        <a href="" class="button-infect" id="button-infect">Confirm</a>
+                    </div>
+                    <div class="readout-infect" id="readout-infect">
+                        status
+                    </div>
                 </div>
-                <div class="readout-infect" id="readout-infect-0">
-                    status
-                </div>
+
+            <section>
+                You can infect any address that is still alive, and has an ETH balance > 0.
+            </section>
+
+        </section>
+        <section  class="data-me" id="me-dead">
+            <div class="you-are">You are</div>
+            <div class="status-me status-dead">DEAD</div>
+
+            <div id="dead-death-date">You died on 20/20/20</div>
+            <div>from strain</div>
+            <div id="dead-strain">2020-nEthV-1</div>
+
+            <div id="dead-infected-by">
+                You were infected by 0x1234567
             </div>
-            <div class="infector" id="infector-1">
-                <div class="infector-controls">
-                    <input class="input-infect"
-                           id="input-infect-1" type="text"
-                           placeholder="Address to cough on"
-                    >
-                    <a href="" class="button-infect" id="button-check-1">Infect</a>
-                    <a href="" class="button-infect" id="button-infect-1">Confirm</a>
-                </div>
-                <div class="readout-infect" id="readout-infect-1">
-                    status
-                </div>
-            </div>
-            <div class="infector" id="infector-2">
-                <div class="infector-controls">
-                    <input class="input-infect"
-                            id="input-infect-2" type="text"
-                           placeholder="Address to cough on"
-                    >
-                    <a href="" class="button-infect" id="button-check-2">Infect</a>
-                    <a href="" class="button-infect" id="button-infect-2">Confirm</a>
-                </div>
-                <div class="readout-infect" id="readout-infect-2">
-                    status
-                </div>
-            </div>
+
         </section>
 
-    </section>
-    <section  class="data-me" id="me-dead">
-        <div class="you-are">You are</div>
-        <div class="status-me status-dead">DEAD</div>
+        <section class="data-me" id="me-healthy">
+            <div class="you-are">You are</div>
+            <div class="status-me status-healthy">HEALTHY</div>
 
-        <div id="dead-death-date">You died on 20/20/20</div>
-        <div>from strain</div>
-        <div id="dead-strain">2020-nEthV-1</div>
-    </section>
+            <div class="status-details">Hopefully you stay that way, but we found this pile of discarded tissues from some sick people. You can have them if you want.</div>
 
-    <section class="data-me" id="me-healthy">
-        <div class="you-are">You are</div>
-        <div class="status-me status-healthy">HEALTHY</div>
+            <section>
+                <a href="" id="button-infectMe">Infect Me</a>
+                <div class="transaction-message" id="message-infectMe">status</div>
+            </section>
 
-        <div class="status-details">Hopefully you stay that way, but we found this pile of discarded tissues from some sick people. You can have them if you want.</div>
-
-        <section>
-            <a href="" id="button-infectMe">Infect Me</a>
-            <div class="transaction-message" id="message-infectMe">status</div>
         </section>
 
     </section>
 
 </section>
 
---------------------------
 <section id="dev">
-DEV!
 </section>
 
 
@@ -151,40 +165,6 @@ DEV!
 <script>
     let site = new Site();
 
-    // window.addEventListener('load', async () => {
-    //     // Read-only provider is exposed by default
-    //     console.log(await ethereum.send('net_version'));
-    //     try {
-    //         // Request full provider if needed
-    //         await ethereum.enable();
-    //         // Full provider exposed
-    //         await ethereum.send('eth_sendTransaction', [/* ... */]);
-    //     } catch (error) {
-    //         // User denied full provider access
-    //     }
-    // });
-    //
 
-
-
-
-
-
-
-
-
-
-    log_clear();
-    log("me:"+site.game.me.loaded+","+site.game.me.failed);
-    log("stats:"+site.game.stats.loaded);
-    log("injected:"+site.game.contract.instances.injected);
-    log("window.ethereum:"+window.ethereum);
-    log("window.ethereum.networkVersion:"+window.ethereum.networkVersion);
-    log("window.web3:"+window.web3);
-    log("window.web3.currrentProvider:"+window.web3.currentProvider);
-    log("web3:"+web3);
-
-    //
-    // _.ById("dev").SetText('fuck frameworks');
 </script>
 </html>

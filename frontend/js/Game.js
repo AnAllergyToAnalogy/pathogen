@@ -29,33 +29,13 @@ class Game{
             status: "ready",    //ready, submitted, success, fail
             message: ""
         }
-        this.coughs = [
-            {
-                checking: false,
-                show: true,
-                infectable: false,
-                victim: "0x0",
-                status: "ready",    //ready, submitted, success, fail
-                message: "",
-            },
-            {
-                checking: false,
-                show: true,
-                infectable: false,
-                victim: "0x0",
-                status: "ready",    //ready, submitted, success, fail
-                message: "",
-            },
-            {
-                checking: false,
-                show: true,
-                infectable: false,
-                victim: "0x0",
-                status: "ready",    //ready, submitted, success, fail
-                message: "",
-            },
-
-        ];
+        this.cough = {
+            checking: false,
+            infectable: false,
+            victim: "0x0",
+            status: "ready",    //ready, submitted, success, fail
+            message: "",
+        };
 
         this.me = {
             loaded: false,
@@ -84,30 +64,36 @@ class Game{
 
         };
 
+        // if(!contract.isCorrectNetwork()) return;
 
-        this.get_stats().catch(e => {
-            console.log('failed to get stats');
-        }).then(()=>{
-            console.log('got stats');
-        });
-
-
-        this.get_me().catch(e => {
-            console.log('failed to get me');
-        }).then(()=>{
-            console.log('got me');
-        });
+        try{
+            this.get_stats().catch(e => {
+                console.log('failed to get stats');
+            }).then(()=>{
+                console.log('got stats');
+            });
 
 
-        this.get_now().catch(e => {
-            console.log("failed to get now");
-        }).then(()=>{
-           console.log("got now");
-        });
+            this.get_me().catch(e => {
+                console.log('failed to get me');
+            }).then(()=>{
+                console.log('got me');
+            });
 
-        this.init_event_hooks();
-        this.init_transaction_hooks();
-        this.process_past_transfer_data();
+
+            this.get_now().catch(e => {
+                console.log("failed to get now");
+            }).then(()=>{
+                console.log("got now");
+            });
+
+            this.init_event_hooks();
+            this.init_transaction_hooks();
+            this.process_past_transfer_data();
+        }catch(e){
+            console.log('init fail');
+        }
+
 
 
         const game = this;
@@ -253,52 +239,30 @@ class Game{
         }
     }
 
-    reset_coughs(){
-        this.coughs = [
-            {
-                checking: false,
-                show: this.me.pathogens > 0,
-                infectable: false,
-                victim: "0x0",
-                status: "ready",    //ready, submitted, success, fail
-                message: "",
-
-            },
-            {
-                checking: false,
-                show: this.me.pathogens > 1,
-                infectable: false,
-                victim: "0x0",
-                status: "ready",    //ready, submitted, success, fail
-                message: "",
-            },
-            {
-                checking: false,
-                show: this.me.pathogens > 2,
-                infectable: false,
-                victim: "0x0",
-                status: "ready",    //ready, submitted, success, fail
-                message: "",
-            }
-        ];
-
-    }
-    async validate_cough(victim,index){
-        // this.coughs[index].infectable = false
-
-        this.coughs[index].victim = victim;
-        this.coughs[index].checking = true;
-
-        let token_index = index;
-        while(this.me.tokenIds.length - 1 < token_index && token_index > 0){
-            token_index--;
+    reset_cough(){
+        this.cough = {
+            checking: false,
+            infectable: false,
+            victim: "0x0",
+            status: "ready",    //ready, submitted, success, fail
+            message: "",
         }
+    }
+    async validate_cough(victim){
+        // this.cough.infectable = false
+
+        //TODO: validate ENS
+
+        this.cough.victim = victim;
+        this.cough.checking = true;
+
+        let token_index = this.me.tokenIds[0];
         try{
-            this.coughs[index].infectable = await this.infectable(victim,token_index);
+            this.cough.infectable = await this.infectable(victim,token_index);
         }catch(e){
 
         }
-        this.coughs[index].checking = false;
+        this.cough.checking = false;
 
     }
 
@@ -335,9 +299,9 @@ class Game{
         }
     }
 
-    infect(index){
+    infect(){
         console.log(index);
-        const victim = this.coughs[index].victim;
+        const victim = this.cough.victim;
 
         while(this.me.tokenIds.length - 1 < index && index > 0){
             index--;
@@ -392,7 +356,7 @@ class Game{
                 }
 
             }
-            this.reset_coughs();
+            this.reset_cough();
 
             this.me.loaded = "loaded";
         }catch(e){

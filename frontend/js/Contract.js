@@ -3,8 +3,8 @@ class Contract{
         this.account = null;
         this.instances = instances;
 
-        this.networkId = 0;
-        this.networkId_required = 1;
+        this.networkId = -1;
+        this.networkId_required = 4;
         this.update_networkId();
 
 
@@ -82,7 +82,7 @@ class Contract{
 
         }
         console.log('subscribe to events');
-        this.instances.Main.events.allEvents({fromBlock:'latest'},(e,evt)=>{
+        this.instances.Main_socket.events.allEvents({fromBlock:'latest'},(e,evt)=>{
             if(!log_event(evt)) return false;
             console.log('Event, Main');
             console.log(evt);
@@ -92,7 +92,9 @@ class Contract{
 
     async get_past_transfers(){
         // this.instances.Main.getPastEvents("allEvents")
-        return await this.instances.Main.getPastEvents("Transfer",{fromBlock:1});
+        return await this.instances.Main.getPastEvents("Transfer",{
+            fromBlock:1,
+            toBlock: 'latest'});
     }
 
     trigger_event(event_name,txHash,returnValues,log_id,block_number){
@@ -185,8 +187,8 @@ class Contract{
         return Boolean(this.account);
     }
     isCorrectNetwork(){
-        return this.networkId > 100;
-        // return this.networkId === this.networkId_required;
+        // return this.networkId > 100;
+        return this.networkId === this.networkId_required;
     }
 
 

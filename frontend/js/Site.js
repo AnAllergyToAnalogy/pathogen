@@ -12,8 +12,6 @@ class Site {
         this.contract = contract;
 
         this.game = new Game(contract);
-
-
         // this.page = null;
 
         this.refresh_page();
@@ -91,6 +89,7 @@ class Site {
         }
     }
 
+
     init_page(){
         let G = this.game;
         let site = this;
@@ -103,21 +102,16 @@ class Site {
             site.game.contract.infectMe();
         });
 
-        for(let i = 0; i <3; i++){
-            _.ById("button-check-"+i).num = i;
-            _.ById("button-check-"+i).OnClick(async (e)=>{
-                const num = e.target.num;
-                site.game.validate_cough(
-                    _.ById("input-infect-"+num).value,e.target.num
-                );
-            });
-            _.ById("button-infect-"+i).num = i;
-            _.ById("button-infect-"+i).OnClick((e)=>{
-                const num = e.target.num;
-                site.game.infect(num)
-            });
+        _.ById("button-check");
+        _.ById("button-check").OnClick(async (e)=>{
+            site.game.validate_cough(
+                _.ById("input-infect").value
+            );
+        });
+        _.ById("button-infect").OnClick((e)=>{
+            site.game.infect()
+        });
 
-        }
 
     }
     refresh_page(){
@@ -128,15 +122,32 @@ class Site {
 
         function do_refresh_page(){
 
+            if(site.game.contract.networkId === -1){
+                _.ById("prompt-loading").Show(true);
+                _.ById("prompt-network").Show(false);
+                _.ById("section-main").Show(false);
+            }else{
+                _.ById("prompt-loading").Show(false);
+                _.ById("prompt-network").Show(
+                    !site.game.contract.isCorrectNetwork()
+                );
+                _.ById("section-main").Show(
+                    site.game.contract.isCorrectNetwork()
+                );
+            }
 
 
 
-            // if(!site.game.me.loaded
-            //     && site.game.contract.isUnlocked()
-            //     && !site.game.me.failed
-            // ){
-            //     site.game.get_me();
-            // }
+
+            // log_clear();
+            // log("me:"+site.game.me.loaded+","+site.game.me.failed);
+            // log("stats:"+site.game.stats.loaded);
+            // log("injected:"+site.game.contract.instances.injected);
+            // log("window.ethereum:"+window.ethereum);
+            // log("window.ethereum.networkVersion:"+window.ethereum.networkVersion);
+            // log("window.web3:"+window.web3);
+            // log("window.web3.currrentProvider:"+window.web3.currentProvider);
+            // log("web3:"+web3);
 
             if(G.stats.loaded === "loaded"){
                 _.ById("readout-infections").SetText(G.stats.infected);
@@ -146,23 +157,37 @@ class Site {
                 _.ById("readout-deaths").SetText("---");
             }
 
-            _.ById("button-unlock").Show(!G.contract.isUnlocked() && G.contract.instances.injected);
+            _.ById("section-unlock").Show((
+                !G.contract.isUnlocked() &&
+                G.contract.instances.injected)
+            );
+            _.ById("info-me-unlock").Show((
+                !G.contract.isUnlocked() &&
+                G.contract.instances.injected)
+            );
+            _.ById("info-me-status").Show(
+                G.me.loaded === "loaded"
+            );
+
+            _.ById("info-me-status-healthy").Show(G.me.status === "healthy");
+            _.ById("info-me-status-dead").Show(G.me.status === "dead");
+            _.ById("info-me-status-infected").Show(G.me.status === "infected");
 
 
-            _.ById("my-data").Show(G.contract.isUnlocked() && G.me.loaded === "loaded");
+            _.ById("my-data").Show(G.contract.isUnlocked());
             _.ById("me-infected").Show(G.me.status === "infected");
             _.ById("me-dead").Show(G.me.status === "dead");
             _.ById("me-healthy").Show(G.me.status === "healthy");
 
 
             if(G.me.loaded === "loading"){
-                _.ById("unlock-status").Show(true);
-                _.ById("unlock-status").SetText("Loading data...");
+                _.ById("me-loading").Show(true);
+                _.ById("me-loading").SetText("Loading data...");
             }else if(G.me.failed){
-                _.ById("unlock-status").Show(true);
-                _.ById("unlock-status").SetText("Failed to load data.");
+                _.ById("me-loading").Show(true);
+                _.ById("me-loading").SetText("Failed to load data.");
             }else{
-                _.ById("unlock-status").Show(false);
+                _.ById("me-loading").Show(false);
             }
 
             if(G.me.loaded === "loaded"){
@@ -197,62 +222,59 @@ class Site {
                     break;
             }
 
-            for(let i = 0 ; i < 3; i++){
-                _.ById("infector-"+i).Show(G.coughs[i].show);
-                _.ById("button-check-"+i).Show(G.coughs[i].infectable !== "okay"
-                    && !G.coughs[i].checking
-                );
-                _.ById("button-infect-"+i).Show(G.coughs[i].infectable === "okay"
-                    && !G.coughs[i].checking
-                );
+            _.ById("button-check").Show(G.cough.infectable !== "okay"
+                && !G.cough.checking
+            );
+            _.ById("button-infect").Show(G.cough.infectable === "okay"
+                && !G.cough.checking
+            );
 
-                let message ="";
-                switch(G.coughs[i].status){
-                    case "ready":
-                        switch(G.coughs[i].infectable){
-                            case false:
-                                message = "";
-                                break;
-                            case "error":
-                                message = "Error: check address";
-                                break;
-                            case "okay":
-                                message = "Victim can be infected";
-                                break;
-                            case "victim_inactive":
-                                message = "Victim account must have Ether";
-                                break;
+            let message ="";
+            switch(G.cough.status){
+                case "ready":
+                    switch(G.cough.infectable){
+                        case false:
+                            message = "";
+                            break;
+                        case "error":
+                            message = "Error: check address";
+                            break;
+                        case "okay":
+                            message = "Victim can be infected";
+                            break;
+                        case "victim_inactive":
+                            message = "Victim account must have Ether";
+                            break;
 
-                            case "victim_dead":
-                                message = "Victim is already dead";
-                                break;
-                            case "victim_immune":
-                                message = "Victim is immune";
-                                break;
-                            case "victim_sick":
-                                message = "Victim is already sick";
-                                break;
-                            case "vector_healthy":
-                                message = "You aren't sick'";
-                                break;
-                        }
-                        break;
-                    case "submitted":
-                        message = "Transaction pending...";
-                        break;
-                    case "success":
-                        message = "Victim successfully infected!";
-                        break;
-                    case "fail":
-                        message = "Transaction failed :(";
-                        break;
+                        case "victim_dead":
+                            message = "Victim is already dead";
+                            break;
+                        case "victim_immune":
+                            message = "Victim is immune";
+                            break;
+                        case "victim_sick":
+                            message = "Victim is already sick";
+                            break;
+                        case "vector_healthy":
+                            message = "You aren't sick'";
+                            break;
+                    }
+                    break;
+                case "submitted":
+                    message = "Transaction pending...";
+                    break;
+                case "success":
+                    message = "Victim successfully infected!";
+                    break;
+                case "fail":
+                    message = "Transaction failed :(";
+                    break;
 
-                }
-                if(G.coughs[i].checking){
-                    message = "Checking victim...";
-                }
-                _.ById("readout-infect-"+i).SetText(message);
             }
+            if(G.cough.checking){
+                message = "Checking victim...";
+            }
+            _.ById("readout-infect").SetText(message);
 
 
             window.requestAnimationFrame(do_refresh_page);
@@ -266,3 +288,5 @@ class Site {
 
     }
 }
+
+// await web3.eth.ens.resolver("ethereum.eth")
