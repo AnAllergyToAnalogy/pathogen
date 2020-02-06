@@ -96,6 +96,10 @@ class Site {
         _.ById("button-unlock").OnClick((e)=>{
             site.game.contract.unlock();
         });
+        _.ById("info-me-unlock").OnClick((e)=>{
+            site.game.contract.unlock();
+        });
+
 
 
         _.ById("button-infectMe").OnClick((e)=>{
@@ -148,6 +152,11 @@ class Site {
             // log("window.web3:"+window.web3);
             // log("window.web3.currrentProvider:"+window.web3.currentProvider);
             // log("web3:"+web3);
+
+
+            if(!G.virus_is_live()){
+                _.ById("ticker").SetText("Virus is extinct");
+            }
 
             if(G.stats.loaded === "loaded"){
                 _.ById("readout-infections").SetText(G.stats.infected);
@@ -290,3 +299,15 @@ class Site {
 }
 
 // await web3.eth.ens.resolver("ethereum.eth")
+
+//todo: namehash (probs have to reverse engineer)
+
+// async function Reverse(address) {
+//     var lookup=address.toLowerCase().substr(2) + '.addr.reverse'
+//     var ResolverContract=await web3.eth.ens.resolver(lookup);
+//     var nh=namehash.hash(lookup);
+//     var name=await ResolverContract.methods.name(nh).call()
+//     return name;
+
+
+//0x217D29BB236A4a082d1999043060360e161F18f9

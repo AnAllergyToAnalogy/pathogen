@@ -10,7 +10,8 @@ class Game{
             loaded: false,
             failed: false,
             now: 0
-        },
+        }
+
         this.stats = {
             loaded: false,
 
@@ -37,6 +38,8 @@ class Game{
             message: "",
         };
 
+        this.infected_by = null;
+
         this.me = {
             loaded: false,
             failed: false,
@@ -50,7 +53,6 @@ class Game{
 
             second_to_live: 0,
 
-
             status: "",
 
             tokenIds: [],
@@ -60,11 +62,7 @@ class Game{
                 infection: ()=>{},
 
             }
-
-
         };
-
-        // if(!contract.isCorrectNetwork()) return;
 
         try{
             this.get_stats().catch(e => {
@@ -106,6 +104,7 @@ class Game{
         return address1.toLowerCase() === address2.toLowerCase();
     }
     process_transfer(from,to,tokenId,block_number){
+
         //sanitise inputs
         from = from.toLowerCase();
         to = to.toLowerCase();
@@ -122,12 +121,21 @@ class Game{
             }
             this.me.pathogens--;
 
-        }
-        if(this.is_same_address(
+            //TODO: update better
+            if(this.me.pathogens === 0){
+                this.refresh_me();
+            }
+        }else if(this.is_same_address(
             to,
             this.me.address
         )){
             //me infected
+            if(!this.is_same_address(
+                from,
+                this.address_zero
+            )){
+                this.infected_by = from;
+            }
             this.refresh_me();
         }
         this.process_infection(to,from);
@@ -142,6 +150,7 @@ class Game{
                 vector = 0;
             }
             this.trigger_infection(victim,vector);
+            this.stats.infected++;
         }
     }
     trigger_infection(victim,vector){
@@ -157,6 +166,12 @@ class Game{
             this.now.failed = true;
         }
         this.now.loaded = "loaded";
+    }
+
+    virus_is_live(){
+        if(this.stats.loaded !== "loaded" || this.now.loaded !== "loaded") return true;
+
+        return this.stats.last_infection + 7 * 24 * 60 * 60 > this.now.now;
     }
 
     process_data(from,to,tokenId,block_number){
@@ -189,6 +204,15 @@ class Game{
             const block_number = Number(evt.blockNumber);
             const tokenId = evt.returnValues._tokenId;
 
+            if(this.is_same_address(
+                to,
+                this.me.address
+            ) && !this.is_same_address(
+                 from,
+                this.address_zero
+            )){
+                this.infected_by = from;
+            }
 
             game.process_data(
                 from,
@@ -249,16 +273,25 @@ class Game{
         }
     }
     async validate_cough(victim){
-        // this.cough.infectable = false
-
-        //TODO: validate ENS
-
         this.cough.victim = victim;
         this.cough.checking = true;
 
-        let token_index = this.me.tokenIds[0];
+
+        //TODO: validate ENS
+        victim = victim.toLowerCase();
+        if(victim.includes('.eth')){
+            try{
+                victim = await web3.eth.ens.getAddress(victim);
+            }catch(e){
+                this.cough.checking = false;
+                this.cough.infectable = "ens_bad";
+                return;
+            }
+        }
+        console.log('blwah');
+
         try{
-            this.cough.infectable = await this.infectable(victim,token_index);
+            this.cough.infectable = await this.infectable(victim,0);
         }catch(e){
 
         }
@@ -288,6 +321,7 @@ class Game{
         this.stats.loaded = "loaded";
     }
 
+
     refresh_me(){
         if(this.me.loaded === "loading"){
             this.me.retry = true;
@@ -300,18 +334,15 @@ class Game{
     }
 
     infect(){
-        console.log(index);
+        // console.log(index);
         const victim = this.cough.victim;
 
-        while(this.me.tokenIds.length - 1 < index && index > 0){
-            index--;
-        }
 
 
         this.contract.transferFrom(
             this.me.address,
             victim,
-            this.me.tokenIds[index]
+            this.me.tokenIds[0]
         )
     }
 

@@ -9,7 +9,7 @@ class Instance {
         // this.provider_sockets = "wss://mainnet.infura.io/ws";
         this.provider_sockets = "wss://rinkeby.infura.io/ws";
         this.addresses = {
-            Main: "0x95944D80D73f2785d6bB645A86F5f59bB65970dD",
+            Main: "0xBe49733b42534068c1003214DFA41f0cc04D0A7D",
         }
 
         this.compiled = compiled_contract;
