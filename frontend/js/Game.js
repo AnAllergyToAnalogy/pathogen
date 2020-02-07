@@ -283,6 +283,7 @@ class Game{
     sort_and_set_leaderboard(leaderboard){
         leaderboard.sort(function(a,b){return a.infections < b.infections})
         this.leaderboard = leaderboard.slice(0,10);
+        this.trigger_leaderboard_update();
     }
     contend_leaderboard(address){
         let leaderboard = this.leaderboard;
@@ -298,7 +299,12 @@ class Game{
             address: address,
             name: "?",
         });
+        this.sort_and_set_leaderboard(leaderboard);
         this.get_leaderboard_names();
+
+    }
+
+    trigger_leaderboard_update(){
 
     }
 
@@ -389,9 +395,6 @@ class Game{
         this.cough.checking = false;
 
     }
-
-
-
 
     async infectable(victim,index){
         let tokenIds = this.me.tokenIds;
