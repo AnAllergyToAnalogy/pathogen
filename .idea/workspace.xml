@@ -4,7 +4,6 @@
     <list default="true" id="58c121b9-a2dc-4ab6-9145-6c4b862e667a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/js/Game.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/Game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/js/Instance.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/Instance.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/js/Site.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/Site.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -81,7 +80,12 @@
       <workItem from="1580897540746" duration="9839000" />
       <workItem from="1580943295206" duration="40000" />
       <workItem from="1580953306450" duration="244000" />
-      <workItem from="1580988752219" duration="5554000" />
+      <workItem from="1580988752219" duration="5810000" />
+      <workItem from="1580996323222" duration="787000" />
+      <workItem from="1581028035995" duration="313000" />
+      <workItem from="1581032091887" duration="963000" />
+      <workItem from="1581038043832" duration="1362000" />
+      <workItem from="1581052427539" duration="4890000" />
     </task>
     <servers />
   </component>

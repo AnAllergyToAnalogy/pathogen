@@ -23,8 +23,22 @@ class Game{
             //address: {
             //      balance: 0,
             //      received: block_number
+            //      infections: 0
             //}
-        }
+        };
+
+        this.leaderboard = [
+        //     {
+        //         address: "0x000",
+        //          name:   "abc.eth"
+        //          infections: 5
+        //     },
+        ];
+
+        this.infection_times = [];
+        this.graph = [
+
+        ]
 
         this.infectMe = {
             status: "ready",    //ready, submitted, success, fail
@@ -103,6 +117,12 @@ class Game{
     is_same_address(address1,address2){
         return address1.toLowerCase() === address2.toLowerCase();
     }
+    is_zero_address(address){
+        return this.is_same_address(
+            address,
+            this.address_zero
+        )
+    }
     process_transfer(from,to,tokenId,block_number){
 
         //sanitise inputs
@@ -130,9 +150,8 @@ class Game{
             this.me.address
         )){
             //me infected
-            if(!this.is_same_address(
-                from,
-                this.address_zero
+            if(!this.is_zero_address(
+                from
             )){
                 this.infected_by = from;
             }
@@ -143,11 +162,13 @@ class Game{
     }
     process_infection(victim,vector){
         if(!Boolean(this.data[victim]) || this.data[victim].balance === 0){
-            if(this.is_same_address(
-                vector,
-                this.address_zero
+            if(this.is_zero_address(
+                vector
             )){
                 vector = 0;
+            }
+            if(vector){
+                this.contend_leaderboard(vector);
             }
             this.trigger_infection(victim,vector);
             this.stats.infected++;
@@ -178,23 +199,38 @@ class Game{
         if(!Boolean(this.data[to])){
             this.data[to] = {
                 balance: 1,
-                received: block_number
+                received: block_number,
+                infections: 0
             }
         }else{
             this.data[to].balance++;
             this.data[to].received = Math.max(block_number,this.data[to].received);
         }
-        if(!this.is_same_address(from,this.address_zero)){
+        if(!this.is_zero_address(from)){
             if(!Boolean(this.data[from])){
                 this.data[from] = {
                     balance: -1,
-                    received: 0
+                    received: 0,
+                    infections: 1
                 }
             }else{
                 this.data[from].balance--;
+                this.data[from].infections++;
             }
         }
     }
+
+    process_graph_points(){
+        this.infection_times.sort(function(a,b){return a > b});
+        this.graph = [];
+        for(let i = 0; i < this.infection_times.length; i += 3){
+            this.graph.push({
+                block: this.infection_times[i],
+                infections: i/3 + 1
+            });
+        }
+    }
+
     async process_past_transfer_data(){
         const game = this;
         const past_transfers = await this.contract.get_past_transfers();
@@ -207,12 +243,13 @@ class Game{
             if(this.is_same_address(
                 to,
                 this.me.address
-            ) && !this.is_same_address(
-                 from,
-                this.address_zero
+            ) && !this.is_zero_address(
+                 from
             )){
                 this.infected_by = from;
             }
+
+            game.infection_times.push(block_number);
 
             game.process_data(
                 from,
@@ -221,10 +258,49 @@ class Game{
                 block_number
             )
         });
-
+        this.process_leaderboard();
+        this.process_graph_points();
         await this.interpret_data();
     }
 
+    async get_leaderboard_names(){
+
+    }
+
+    process_leaderboard(){
+        let leaderboard = [];
+        for(let address in this.data){
+            if(this.data[address].infections > 0)
+            leaderboard.push({
+                infections: this.data[address].infections,
+                address: address,
+                name: "?",
+            });
+        }
+        this.sort_and_set_leaderboard(leaderboard);
+        this.get_leaderboard_names();
+    }
+    sort_and_set_leaderboard(leaderboard){
+        leaderboard.sort(function(a,b){return a.infections < b.infections})
+        this.leaderboard = leaderboard.slice(0,10);
+    }
+    contend_leaderboard(address){
+        let leaderboard = this.leaderboard;
+        for(let i = 0; i < leaderboard.length; i++){
+            if(this.is_same_address(address,leaderboard[i].address)){
+                leaderboard[i].infections = this.data[address].infections;
+                this.sort_and_set_leaderboard(leaderboard);
+                return;
+            }
+        }
+        leaderboard.push({
+            infections: this.data[address].infections,
+            address: address,
+            name: "?",
+        });
+        this.get_leaderboard_names();
+
+    }
 
     async interpret_data(){
         function isDead(block_now,last_transfer){
@@ -261,6 +337,20 @@ class Game{
         this.contract.transactions.infectMe.fail =function(data){
             game.infectMe.status = "fail";
         }
+
+        this.contract.transactions.transferFrom.submit = function(data){
+            game.cough.status = "submitted"
+        }
+        this.contract.transactions.transferFrom.success = function(data){
+            game.cough.status = "success";
+        }
+        this.contract.transactions.transferFrom.fail = function(data){
+            game.cough.status = "fail";
+        }
+
+
+
+
     }
 
     reset_cough(){
@@ -275,7 +365,7 @@ class Game{
     async validate_cough(victim){
         this.cough.victim = victim;
         this.cough.checking = true;
-
+        this.cough.infectable = "checking";
 
         //TODO: validate ENS
         victim = victim.toLowerCase();
@@ -285,10 +375,11 @@ class Game{
             }catch(e){
                 this.cough.checking = false;
                 this.cough.infectable = "ens_bad";
-                return;
             }
         }
-        console.log('blwah');
+        if(this.cough.infectable === "ens_bad"){
+            return;
+        }
 
         try{
             this.cough.infectable = await this.infectable(victim,0);
@@ -298,6 +389,8 @@ class Game{
         this.cough.checking = false;
 
     }
+
+
 
 
     async infectable(victim,index){
