@@ -97,7 +97,7 @@ header{
 .colour-healthy{
     color: green;
 }
-.colour-sick{
+.colour-infected{
     color: yellow;
 }
 .colour-dead{
@@ -226,4 +226,99 @@ header{
 
 .my-data{
     padding-bottom: 50px;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*align-items: stretch;*/
+}
+
+.data-me{
+    padding-top:25px;
+    padding-bottom: 25px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.me-subtext{
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.status-me{
+    font-size: 24px;
+    font-weight: bold;
+    line-height:30px
+}
+.strain-me{
+    font-size: 18px;
+    line-height:30px;
+    padding-bottom: 70px;
+}
+
+.status-details {
+    padding-left:15px;
+    padding-right:15px;
+    font-size: 16px;
+    text-align: center;
+
+    padding-bottom: 70px;
+}
+
+/*info-main*/
+
+.infected-by{
+    font-size: 14px;
+
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+    display: flex;
+    flex-direction: column;
+
+
+    padding-bottom: 70px;
+}
+.infected-by-address{
+    font-size: 16px;
+}
+
+
+.infector{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+    padding-bottom:70px
+}
+
+.input-infect{
+    margin-top:10px;
+    margin-bottom: 10px;
+    /*color:black;*/
+    width:90vw;
+    background-color: #303030;
+    height:30px;
+    border-radius: 15px;
+    border: none;
+
+    text-align: center;
+}
+.input-infect::placeholder{
+    color: rgba(255,255,255,0.5);
+}
+.input-infect:focus{
+    background-color: white;
+}
+.input-infect:focus::placeholder{
+    color:rgba(0,0,0,0.5);
+}
+.input-infect:active{
+    background-color: white;
 }

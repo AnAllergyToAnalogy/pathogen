@@ -123,12 +123,13 @@ class Site {
     }
     add_leader(position,infections,leader,address){
         _.ById("leaderboard").innerHTML +=
-            "<div>" +
+            "<div class='leaderboard-item'>" +
             "<span>"+position+".</span>" +
+            "<a href=''>"+leader+"</a>"+
             "<span>"+infections+" infections</span>" +
-            "<span>"+leader+"</span>"+
             "</div>";
     }
+
 
 
 

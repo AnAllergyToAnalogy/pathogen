@@ -3,7 +3,6 @@ function dev(){
     _.ById("prompt-loading").Show(false);
     _.ById("prompt-network").Show(false);
 
-    // _.ById("my-data").Show(false);
 
     _.ById("info-me-unlock").Show(true);
 
@@ -16,9 +15,12 @@ function dev(){
 
     _.ById("section-unlock").Show(false);
 
+    _.ById("my-data").Show(true);
+
+    _.ById("me-loading").Show(false);
 
     _.ById("me-infected").Show(false);
-    _.ById("me-healthy").Show(false);
+    _.ById("me-healthy").Show(true);
     _.ById("me-dead").Show(false);
 
 }

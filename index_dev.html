@@ -44,7 +44,7 @@
                 <div class="info-me-status" id="info-me-status">
                     You are
                     <span class="info-me-status-status colour-healthy" id="info-me-status-healthy">HEALTHY</span>
-                    <span class="info-me-status-status colour-sick"    id="info-me-status-infected">INFECTED</span>
+                    <span class="info-me-status-status colour-infected"    id="info-me-status-infected">INFECTED</span>
                     <span class="info-me-status-status colour-dead"    id="info-me-status-dead">DEAD</span>
                 </div>
                 <a href="" class="link-unlock" id="info-me-unlock">
@@ -97,10 +97,12 @@
         <section class="my-data" id="my-data">
             <section class="prompt" id="me-loading">Loading your data...</section>
             <section class="data-me" id="me-infected">
-                <div class="you-are">You are</div>
-                <div class="status-me status-infected">INFECTED</div>
-                <div class="status-details"> with strain</div>
-                <div id="infected-strain">2020-nEthV-1 ?!?!?!?</div>
+                <div class="me-subtext">You are</div>
+                <div class="status-me colour-infected">INFECTED</div>
+                <div class="me-subtext">with strain</div>
+                <div id="infected-strain"
+                     class="strain-me colour-infected"
+                        >2020-nEthV-1</div>
 
                 <div class="status-details">You will die in
                     <span id="infected-death-date">15 hours</span>
@@ -108,60 +110,69 @@
                     <span id="infected-cough-count">2 more people</span>.
                 </div>
 
-                <div id="infected-infected-by">
-                    You were infected by 0x1234567
+                <div class="infected-by">
+                    You were infected by
+                    <a href="" class="infected-by-address" id="infected-infected-by">
+                        0x1234567
+                    </a>
                 </div>
 
 
-                <div class="status-details">Infect someone</div>
+
+
                 <div class="infector">
-                    <div class="infector-controls">
+                    <div class="me-subtext">Infect someone</div>
                         <input
                                 class="input-infect"
                                 id="input-infect" type="text"
                                 placeholder="Address or ENS name"
                         >
-                        <a href="" class="button-infect" id="button-check">Infect</a>
-                        <a href="" class="button-infect" id="button-infect">Confirm</a>
-                    </div>
+                        <a href="" class="button-infect" id="button-check">INFECT</a>
+                        <a href="" class="button-infect" id="button-infect">CONFIRM</a>
                     <div class="readout-infect" id="readout-infect">
                         status
                     </div>
                 </div>
 
-                <section>
+                <section class="info-main">
                     You can infect any address that is still alive, and has an ETH balance > 0.
                 </section>
 
             </section>
             <section  class="data-me" id="me-dead">
-                <div class="you-are">You are</div>
-                <div class="status-me status-dead">DEAD</div>
+                <div class="me-subtext">You are</div>
+                <div class="status-me colour-dead">DEAD</div>
 
-                <div id="dead-death-date">You died on 20/20/20</div>
-                <div>from strain</div>
-                <div id="dead-strain">2020-nEthV-1</div>
+                <div id="dead-death-date"
+                    class="status-details"
+                >You died on 20/20/20</div>
+                <div class="me-subtext">from strain</div>
+                <div id="dead-strain"
+                     class="strain-me colour-dead"
+                >2020-nEthV-1</div>
 
-                <div id="dead-infected-by">
-                    You were infected by 0x1234567
+                <div class="infected-by">
+                    You were infected by
+                    <a href="" class="infected-by-address" id="dead-infected-by">
+                        0x1234567
+                    </a>
                 </div>
 
             </section>
             <section class="data-me" id="me-healthy">
-                <div class="you-are">You are</div>
-                <div class="status-me status-healthy">HEALTHY</div>
+                <div class="me-subtext">You are</div>
+                <div class="status-me colour-healthy">HEALTHY</div>
 
-                <section>
-                    <div class="status-details"> You are immune to strain</div>
-                    <div id="healthy-strain">2020-nEthV-1 ?!?!?!?</div>
-                </section>
+
+                    <div class="me-subtext"> You are immune to strain</div>
+                    <div id="healthy-strain"
+                        class="strain-me colour-healthy"
+                    >2020-nEthV-1</div>
 
                 <div class="status-details">Hopefully you stay that way, but we found this pile of discarded tissues from some sick people. You can have them if you want.</div>
 
-                <section>
-                    <a href="" id="button-infectMe">Infect Me</a>
-                    <div class="transaction-message" id="message-infectMe">status</div>
-                </section>
+                <a href="" id="button-infectMe">Infect Me</a>
+                <div class="transaction-message" id="message-infectMe">status</div>
 
             </section>
 

@@ -1,5 +1,6 @@
 const HDWalletProvider = require('truffle-hdwallet-provider');
 
+//its a random seed from a test rpc, don't bother.
 const seed = "hedgehog afraid caught planet say audit apology nose unique evidence clarify shrug";
 const provider = new HDWalletProvider(
     seed,
