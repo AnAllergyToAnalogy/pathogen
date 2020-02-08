@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Ethervirus 2020-nEthV</title>
+
+    <script src="frontend/js/FuckFrameworks.js"></script>
+
+
+<!--    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.2.0/dist/web3.min.js" crossorigin="anonymous"></script>-->
+<!--    <script src="frontend/js/Compiled.js"></script>-->
+<!--    <script src="frontend/js/Instance.js"></script>-->
+<!--    <script src="frontend/js/Contract.js"></script>-->
+<!--    <script src="frontend/js/Game.js"></script>-->
+<!--    <script src="frontend/js/Site.js"></script>-->
+
+
+    <script src="frontend/js/dev.js"></script>
+
+    <link rel="stylesheet" href="frontend/css/main_dev.css">
+</head>
+<body>
+    <header class="header">
+        EtherVirus Tracker
+    </header>
+
+    <section class="prompt" id="prompt-loading">
+        Loading...
+    </section>
+    <section class="prompt" id="prompt-network">
+        Please switch to the Rinkeby network.
+    </section>
+
+    <section class="main" id="section-main">
+        <section class="info-bar">
+            <section class="statistics">
+                <div>Infections:    <span id="readout-infections">1230</span></div>
+                <div>Deaths:        <span id="readout-deaths">123</span></div>
+            </section>
+            <section class="info-me">
+                <div class="info-me-status" id="info-me-status">
+                    You are
+                    <span class="info-me-status-status colour-healthy" id="info-me-status-healthy">HEALTHY</span>
+                    <span class="info-me-status-status colour-sick"    id="info-me-status-infected">INFECTED</span>
+                    <span class="info-me-status-status colour-dead"    id="info-me-status-dead">DEAD</span>
+                </div>
+                <a href="" class="link-unlock" id="info-me-unlock">
+                    Unlock
+                </a>
+            </section>
+        </section>
+
+        <section class="info-main">
+            A virus has emerged on the Ethereum mainnet, spreading fear and panic across the blockchain.
+        </section>
+
+        <section class="graph">
+            Graph
+        </section>
+
+
+
+        <section class="leaderboard"  id="leaderboard">
+            <div class="leaderboard-title">Most dangerous vectors</div>
+            <div class="leaderboard-list" id="leaderboard-list">
+                <div class="leaderboard-item">
+                    <span>1.
+                    <a href="">0xABCD...</a>
+                    </span>
+                    <span>123 infections</span>
+                </div>
+                <div class="leaderboard-item">
+                    <span>2.
+                    <a href="">0xABCD...</a>
+                    </span>
+
+                    <span> 17 infections</span>
+                </div>
+                <div class="leaderboard-item">
+                    <span>3.
+                    <a href="">0xABCD...</a>
+                    </span>
+
+                    <span> 4 infections</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-unlock" class="unlock" >
+            <a href="" id="button-unlock">Unlock account to see if you're okay</a>
+            <span id="unlock-status"></span>
+        </section>
+
+        <section class="my-data" id="my-data">
+            <section class="prompt" id="me-loading">Loading your data...</section>
+            <section class="data-me" id="me-infected">
+                <div class="you-are">You are</div>
+                <div class="status-me status-infected">INFECTED</div>
+                <div class="status-details"> with strain</div>
+                <div id="infected-strain">2020-nEthV-1 ?!?!?!?</div>
+
+                <div class="status-details">You will die in
+                    <span id="infected-death-date">15 hours</span>
+                    unless you cough on
+                    <span id="infected-cough-count">2 more people</span>.
+                </div>
+
+                <div id="infected-infected-by">
+                    You were infected by 0x1234567
+                </div>
+
+
+                <div class="status-details">Infect someone</div>
+                <div class="infector">
+                    <div class="infector-controls">
+                        <input
+                                class="input-infect"
+                                id="input-infect" type="text"
+                                placeholder="Address or ENS name"
+                        >
+                        <a href="" class="button-infect" id="button-check">Infect</a>
+                        <a href="" class="button-infect" id="button-infect">Confirm</a>
+                    </div>
+                    <div class="readout-infect" id="readout-infect">
+                        status
+                    </div>
+                </div>
+
+                <section>
+                    You can infect any address that is still alive, and has an ETH balance > 0.
+                </section>
+
+            </section>
+            <section  class="data-me" id="me-dead">
+                <div class="you-are">You are</div>
+                <div class="status-me status-dead">DEAD</div>
+
+                <div id="dead-death-date">You died on 20/20/20</div>
+                <div>from strain</div>
+                <div id="dead-strain">2020-nEthV-1</div>
+
+                <div id="dead-infected-by">
+                    You were infected by 0x1234567
+                </div>
+
+            </section>
+            <section class="data-me" id="me-healthy">
+                <div class="you-are">You are</div>
+                <div class="status-me status-healthy">HEALTHY</div>
+
+                <section>
+                    <div class="status-details"> You are immune to strain</div>
+                    <div id="healthy-strain">2020-nEthV-1 ?!?!?!?</div>
+                </section>
+
+                <div class="status-details">Hopefully you stay that way, but we found this pile of discarded tissues from some sick people. You can have them if you want.</div>
+
+                <section>
+                    <a href="" id="button-infectMe">Infect Me</a>
+                    <div class="transaction-message" id="message-infectMe">status</div>
+                </section>
+
+            </section>
+
+        </section>
+
+    </section>
+
+    <section id="dev">
+    </section>
+
+
+<footer id="ticker">
+        Virus is live
+</footer>
+
+</body>
+
+<script>
+    function log_clear(){
+        _.ById("dev").SetText("");
+    }
+    function log(data){
+        _.ById("dev").SetText(
+            _.ById("dev").innerText +
+            data +" \r\n"
+        );
+    }
+
+
+</script>
+
+<script>
+    // let site = new Site();
+
+    dev();
+</script>
+</html>

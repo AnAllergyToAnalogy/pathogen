@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58c121b9-a2dc-4ab6-9145-6c4b862e667a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/css/main_dev.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/js/dev.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/index_dev.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/js/Game.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/Game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/js/Site.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/Site.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,7 +29,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../web3-compatability" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -41,8 +42,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\miste\Documents\Solidity\pathogen\frontend\js" />
       <recent name="C:\Users\miste\Documents\Solidity\pathogen" />
+      <recent name="C:\Users\miste\Documents\Solidity\pathogen\frontend\js" />
       <recent name="C:\Users\miste\Documents\Solidity\pathogen\ethereum" />
     </key>
   </component>
@@ -88,7 +89,9 @@
       <workItem from="1581038043832" duration="1362000" />
       <workItem from="1581052427539" duration="5000000" />
       <workItem from="1581074087992" duration="241000" />
-      <workItem from="1581074620501" duration="8751000" />
+      <workItem from="1581074620501" duration="12136000" />
+      <workItem from="1581142430134" duration="1084000" />
+      <workItem from="1581144067672" duration="10209000" />
     </task>
     <servers />
   </component>
