@@ -17,10 +17,7 @@
         <script src="frontend/js/Game.js"></script>
         <script src="frontend/js/Site.js"></script>
 
-
-<!--    <script src="frontend/js/dev.js"></script>-->
-
-    <link rel="stylesheet" href="frontend/css/main_dev.css">
+    <link rel="stylesheet" href="frontend/css/main.css">
 </head>
 <body>
 <header class="header">
@@ -37,16 +34,18 @@
 <section class="main" id="section-main">
     <section class="info-bar">
         <section class="statistics">
-            <div>Infections:    <span id="readout-infections">1230</span></div>
-            <div>Deaths:        <span id="readout-deaths">123</span></div>
+            <div>Infections:    <span id="readout-infections">--</span></div>
+            <div>Deaths:        <span id="readout-deaths">--</span></div>
         </section>
         <section class="info-me">
-            <div class="info-me-status" id="info-me-status">
-                You are
-                <span class="info-me-status-status colour-healthy" id="info-me-status-healthy">HEALTHY</span>
-                <span class="info-me-status-status colour-infected"    id="info-me-status-infected">INFECTED</span>
-                <span class="info-me-status-status colour-dead"    id="info-me-status-dead">DEAD</span>
-            </div>
+            <a href="#my-data">
+                <div class="info-me-status" id="info-me-status" >
+                    You are
+                    <span class="info-me-status-status colour-healthy" id="info-me-status-healthy">HEALTHY</span>
+                    <span class="info-me-status-status colour-infected"    id="info-me-status-infected">INFECTED</span>
+                    <span class="info-me-status-status colour-dead"    id="info-me-status-dead">DEAD</span>
+                </div>
+            </a>
             <a href="" class="link-unlock" id="info-me-unlock">
                 Unlock
             </a>
@@ -91,20 +90,20 @@
         <div class="leaderboard-list" id="leaderboard-list">
             <div class="leaderboard-item">
                     <span>1.
-                    <a href="">0xABCD...</a>
+                    <a class="leaderboard-address" href="">0xABCD...</a>
                     </span>
                 <span>123 infections</span>
             </div>
             <div class="leaderboard-item">
                     <span>2.
-                    <a href="">0xABCD...</a>
+                    <a class="leaderboard-address" href="">0xABCD...</a>
                     </span>
 
                 <span> 17 infections</span>
             </div>
             <div class="leaderboard-item">
                     <span>3.
-                    <a href="">0xABCD...</a>
+                    <a class="leaderboard-address" href="">0xABCD...</a>
                     </span>
 
                 <span> 4 infections</span>
@@ -133,9 +132,9 @@
                 <span id="infected-cough-count">2 more people</span>.
             </div>
 
-            <div class="infected-by">
+            <div id="infected-infected-by" class="infected-by">
                 You were infected by
-                <a href="" class="infected-by-address" id="infected-infected-by">
+                <a href="" class="infected-by-address" id="infected-infected-by-address">
                     0x1234567
                 </a>
             </div>
@@ -158,7 +157,7 @@
             </div>
 
             <section class="info-main">
-                You can infect any address that is still alive, and has an ETH balance > 0.
+                You can infect any address that is still alive, healthy, and has an ETH balance > 0.
             </section>
 
         </section>
@@ -174,9 +173,9 @@
                  class="strain-me colour-dead"
             >2020-nEthV-1</div>
 
-            <div class="infected-by">
+            <div class="infected-by" id="dead-infected-by">
                 You were infected by
-                <a href="" class="infected-by-address" id="dead-infected-by">
+                <a href="" class="infected-by-address" id="dead-infected-by-address">
                     0x1234567
                 </a>
             </div>
@@ -201,10 +200,13 @@
 
     </section>
 
+    <section class="copyright">
+        © Copyright nobody, crypto is for everybody. Just don't be a dick. Or do. Whatever.
+    </section>
+
 </section>
 
-<section id="dev">
-</section>
+
 
 
 <footer id="ticker">
@@ -214,22 +216,6 @@
 </body>
 
 <script>
-    function log_clear(){
-        _.ById("dev").SetText("");
-    }
-    function log(data){
-        _.ById("dev").SetText(
-            _.ById("dev").innerText +
-            data +" \r\n"
-        );
-    }
-
-
-</script>
-
-<script>
     let site = new Site();
-
-    // dev();
 </script>
 </html>

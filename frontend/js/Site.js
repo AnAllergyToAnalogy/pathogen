@@ -114,14 +114,17 @@ class Site {
         _.ById("leaderboard").Show(
             leaderboard.length > 0
         );
-        _.ById("leaderboard").SetHTML("");
+        _.ById("leaderboard").SetHTML(
+            '<div class="leaderboard-title">Most dangerous vectors</div>'
+
+        );
         for(let l = 0; l < leaderboard.length; l++){
 
             let leader;
             if(leaderboard[l].name !== "?"){
                 leader = leaderboard[l].name;
             }else{
-                leader = leaderboard[l].address.substring(0,8)+'...';
+                leader = leaderboard[l].address;//.substring(0,8)+'...';
             }
 
             this.add_leader(l+1,
@@ -135,7 +138,7 @@ class Site {
         _.ById("leaderboard").innerHTML +=
             "<div class='leaderboard-item'>" +
             "<span>"+position+".</span>" +
-            "<a href=''>"+leader+"</a>"+
+            "<a class='leaderboard-address' href='https://etherscan.io/address/"+address+"'>"+leader+"</a>"+
             "<span>"+infections+" infections</span>" +
             "</div>";
     }
@@ -146,15 +149,20 @@ class Site {
             && this.game.graph.length > 0
             && this.game.block_number.loaded === "loaded"
         ){
-            if(window.innerWidth <= 600){
+            if(window.innerWidth <= 600) {
                 //Mobile
                 this.redraw_graph(
-                    window.innerWidth - 50
+                    window.innerWidth - 80
+                );
+            }else if(window.innerWidth <= 768){
+                //Tablet phablet dablet
+                this.redraw_graph(
+                    480
                 );
             }else{
-                //Not Mobile
+                //Real computer
                 this.redraw_graph(
-                    500
+                    400
                 );
             }
 
@@ -182,15 +190,11 @@ class Site {
 
         if(GG.length == 0) return;
 
-        // console.log(GG.length);
-
-        // console.log(G);
-        // console.log(GG);
         G.width = width;
         G.height = height;
 
         //TODO: set limits
-        G.yMax = GG[GG.length-1].infections * 1.2;
+        G.yMax = Math.round(GG[GG.length-1].infections * 1.2);
         G.xMin = GG[0].block;
         G.xMax = this.game.block_number.block_number;
 
@@ -213,15 +217,24 @@ class Site {
         ctx.strokeStyle = "#FFFFFF";
         ctx.strokeRect(0, 0, G.width, G.height);
 
+        ctx.strokeStyle = "rgba(255,255,255,0.4)";
+        ctx.beginPath();
+        for(let j = 1; j < 10; j++){
+            ctx.moveTo(0,j/10 * G.height);
+            ctx.lineTo(G.width,j/10 * G.height);
+
+            ctx.moveTo(j/10 * G.width, 0);
+            ctx.lineTo(j/10 * G.width, G.height);
+        }
+        ctx.stroke();
+
+
+        ctx.beginPath();
         ctx.strokeStyle = "#FF0000";
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 3;
         ctx.moveTo(0, G.height);
 
         for(let i = 0; i < GG.length; i++){
-            console.log(
-                X_to_x(GG[i].block),
-                Y_to_y(GG[i].infections)
-            );
             ctx.lineTo(
                 X_to_x(GG[i].block),
                 Y_to_y(GG[i].infections)
@@ -237,19 +250,10 @@ class Site {
         let G = this.game;
         let site = this;
 
-        // window.addEventListener("orientationchange", function() {
-        //     site.clear_graph();
-        // });
-        // window.addEventListener("resize", function() {
-        //     console.log('resize');
-        //     site.clear_graph();
-        // });
         window.onresize = function(){
-            // console.log('resize');
             site.clear_graph();
         };
         window.onorientationchange = function(){
-            // console.log('orientation change');
             site.clear_graph();
         };
 
@@ -358,7 +362,11 @@ class Site {
                 _.ById("infected-death-date").SetText(site.format_future_death_date(G.me.death_date));
                 _.ById("infected-cough-count").SetText(site.format_cough_count(G.me.pathogens));
 
-
+                _.ById("infected-infected-by").Show(Boolean(site.game.infected_by));
+                if(site.game.infected_by){
+                    _.ById("infected-infected-by-address").SetText(site.game.infected_by);
+                    _.ById("infected-infected-by-address").href = "https://etherscan.io/address/"+site.game.infected_by;
+                }
                 _.ById("button-check").Show((G.cough.infectable !== "okay"
                     || (G.cough.status === "success") || (G.cough.status === "fail")
                     )&& !G.cough.checking
@@ -420,6 +428,12 @@ class Site {
             if(me_dead){
                 _.ById("dead-death-date").SetText(site.format_past_death_date(G.me.death_date));
                 _.ById("dead-strain").SetText(site.format_strain(G.me.immunity));
+
+                _.ById("dead-infected-by").Show(Boolean(site.game.infected_by));
+                if(site.game.infected_by){
+                    _.ById("dead-infected-by-address").SetText(site.game.infected_by);
+                    _.ById("dead-infected-by-address").href = "https://etherscan.io/address/"+site.game.infected_by;
+                }
             }
             if(me_healthy){
                 _.ById("button-infectMe").Show(G.infectMe.status === "ready");
@@ -468,7 +482,7 @@ class Site {
 
 //0x217D29BB236A4a082d1999043060360e161F18f9
 //0xCa9FF2640c03A72BC2e0360c70F32F8Da9b8f9B0
-
+//0x238Ae7d0E1a3EF162d78534a1BA968AC139D4233
 
 // function node(address addr) public pure returns (bytes32) {
 //     return keccak256(abi.encodePacked(ADDR_REVERSE_NODE, sha3HexAddress(addr)));
