@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58c121b9-a2dc-4ab6-9145-6c4b862e667a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ethereum/build/Pathogen721.json" beforeDir="false" afterPath="$PROJECT_DIR$/ethereum/build/Pathogen721.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ethereum/contracts/Pathogen721.sol" beforeDir="false" afterPath="$PROJECT_DIR$/ethereum/contracts/Pathogen721.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/js/Site.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/Site.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metadata/2020-nEthV.json" beforeDir="false" afterPath="$PROJECT_DIR$/metadata/2020-nEthV.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metadata/2020-nEthV.png" beforeDir="false" afterPath="$PROJECT_DIR$/metadata/2020-nEthV.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/js/Compiled.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/Compiled.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +90,7 @@
       <workItem from="1581074620501" duration="12136000" />
       <workItem from="1581142430134" duration="1084000" />
       <workItem from="1581144067672" duration="28603000" />
-      <workItem from="1581233952783" duration="16168000" />
+      <workItem from="1581233952783" duration="16419000" />
     </task>
     <servers />
   </component>
