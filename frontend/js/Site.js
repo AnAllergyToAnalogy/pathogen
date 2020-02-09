@@ -14,6 +14,16 @@ class Site {
         this.game = new Game(contract);
         // this.page = null;
 
+        this.graph = {
+            drawn: false,
+            xMin: 0,
+            xMax: 1,
+            yMin: 0,
+            yMax: 1,
+            width: 100,
+            height: 100
+        }
+
 
 
         this.refresh_page();
@@ -130,12 +140,119 @@ class Site {
             "</div>";
     }
 
+    check_graph(){
 
+        if(!this.graph.drawn
+            && this.game.graph.length > 0
+            && this.game.block_number.loaded === "loaded"
+        ){
+            if(window.innerWidth <= 600){
+                //Mobile
+                this.redraw_graph(
+                    window.innerWidth - 50
+                );
+            }else{
+                //Not Mobile
+                this.redraw_graph(
+                    500
+                );
+            }
+
+        }
+    }
+    clear_graph(){
+        this.graph.drawn = false;
+    }
+
+    redraw_graph(width){
+        const site = this;
+
+        function X_to_x(X){
+            const G = site.graph;
+            return (X - G.xMin)/(G.xMax - G.xMin) * G.width;
+        }
+        function Y_to_y(Y){
+            const G = site.graph;
+            return ( 1 - (Y - G.yMin)/(G.yMax - G.yMin)) * G.height;
+        }
+
+        const height = Math.round(width/3*2);
+        const G = this.graph;
+        const GG = this.game.graph;
+
+        if(GG.length == 0) return;
+
+        // console.log(GG.length);
+
+        // console.log(G);
+        // console.log(GG);
+        G.width = width;
+        G.height = height;
+
+        //TODO: set limits
+        G.yMax = GG[GG.length-1].infections * 1.2;
+        G.xMin = GG[0].block;
+        G.xMax = this.game.block_number.block_number;
+
+        const xDif =
+                Math.round((G.xMax - G.xMin) / 3 /* minutes */
+                / 60 /* hours */
+                / 24 /* days */);
+
+        _.ById("graph-yMax").SetText(G.yMax);
+        _.ById("graph-xMax").SetText(xDif);
+
+        const canvas = _.ById("graph-canvas");
+        canvas.width = width;
+        canvas.height = height;
+
+        _.ById("graph-labels-y").height = height;
+        _.ById("graph-labels-x").style = "width:"+width+"px";
+
+        const ctx = canvas.getContext("2d");
+        ctx.strokeStyle = "#FFFFFF";
+        ctx.strokeRect(0, 0, G.width, G.height);
+
+        ctx.strokeStyle = "#FF0000";
+        ctx.lineWidth = 2;
+        ctx.moveTo(0, G.height);
+
+        for(let i = 0; i < GG.length; i++){
+            console.log(
+                X_to_x(GG[i].block),
+                Y_to_y(GG[i].infections)
+            );
+            ctx.lineTo(
+                X_to_x(GG[i].block),
+                Y_to_y(GG[i].infections)
+            )
+        }
+
+        ctx.stroke();
+        this.graph.drawn = true;
+    }
 
 
     init_page(){
         let G = this.game;
         let site = this;
+
+        // window.addEventListener("orientationchange", function() {
+        //     site.clear_graph();
+        // });
+        // window.addEventListener("resize", function() {
+        //     console.log('resize');
+        //     site.clear_graph();
+        // });
+        window.onresize = function(){
+            // console.log('resize');
+            site.clear_graph();
+        };
+        window.onorientationchange = function(){
+            // console.log('orientation change');
+            site.clear_graph();
+        };
+
         _.ById("button-unlock").OnClick((e)=>{
             site.game.contract.unlock();
         });
@@ -194,6 +311,11 @@ class Site {
                 _.ById("readout-infections").SetText("---");
                 _.ById("readout-deaths").SetText("---");
             }
+
+
+            _.ById("graph-table").Show(site.graph.drawn);
+            site.check_graph();
+
 
             _.ById("section-unlock").Show((
                 !G.contract.isUnlocked() &&

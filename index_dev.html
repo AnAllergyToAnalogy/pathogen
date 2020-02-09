@@ -57,8 +57,32 @@
             A virus has emerged on the Ethereum mainnet, spreading fear and panic across the blockchain.
         </section>
 
-        <section class="graph">
-            Graph
+        <section class="graph" id="graph">
+            <table>
+                <tr>
+                    <td id="graph-labels-y" class="graph-labels-y" height="200">
+                        <span id="graph-yMax" class="label-y label-yPos">15</span>
+                        <span class="label-y label-yAxis">Infections</span>
+                        <span class="label-y label-yPos">0</span>
+                    </td>
+                    <td>
+                        <canvas
+                                class="graph-canvas"
+                                id="graph-canvas" width="300" height="200">
+                        </canvas>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td  id="graph-labels-x"
+                         class="graph-labels-x" style="width:300px">
+                        <span class="label-x label-xPos">0</span>
+                        <span class="label-x label-xAxis">Days</span>
+                        <span id="graph-xMax" class="label-x label-xPos">15</span>
+                    </td>
+                </tr>
+            </table>
+
         </section>
 
 

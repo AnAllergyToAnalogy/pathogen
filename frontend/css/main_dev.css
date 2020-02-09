@@ -162,7 +162,7 @@ header{
 
 
     height: 60vw;
-    background-color: #202020;
+    /*background-color: #202020;*/
     margin-bottom: 80px;
 }
 
@@ -321,4 +321,68 @@ header{
 }
 .input-infect:active{
     background-color: white;
+}
+
+
+
+
+.graph{
+    height: 100vw;
+
+    font-size: 10px;
+    /*background-color: green;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+
+    justify-content: center;
+}
+.graph-canvas{
+    outline: white 1px solid;
+    position:relative;
+    /*display: block;*/
+    top:0;
+    right:0;
+}
+.graph-labels-y{
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    top:0;
+    left:0;
+    /*height:100px;*/
+    /*background-color: orange;*/
+    justify-content: space-between;
+
+    padding-right:5px;
+}
+.graph-labels-x{
+    /*background-color: blue;*/
+    /*position:relative;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    bottom:0;
+    right:0;
+}
+
+
+.label-yAxis{
+    writing-mode: sideways-lr;
+    text-orientation: mixed;
+}
+.label-y{
+    display: block;
+    /*position: relative;*/
+}
+
+/*Tablet*/
+@media (min-width: 600px) {
+
+}
+
+/*Real computer*/
+@media (min-width: 768px) {
+
 }

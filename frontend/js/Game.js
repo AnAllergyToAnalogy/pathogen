@@ -12,6 +12,12 @@ class Game{
             now: 0
         }
 
+        this.block_number = {
+            loaded: false,
+            failed: false,
+            block_number: 0
+        }
+
         this.stats = {
             loaded: false,
 
@@ -97,6 +103,11 @@ class Game{
                 console.log("failed to get now");
             }).then(()=>{
                 console.log("got now");
+            });
+            this.get_block_number().catch(e => {
+                console.log("failed to get block num");
+            }).then(()=>{
+                console.log("got block num");
             });
 
             this.init_event_hooks();
@@ -187,6 +198,16 @@ class Game{
             this.now.failed = true;
         }
         this.now.loaded = "loaded";
+    }
+    async get_block_number(){
+        this.block_number.loaded = "loading";
+        try{
+            this.block_number.block_number = Number(await this.contract.get_block_number());
+        }catch(e){
+            this.block_number.loaded = false;
+            this.block_number.failed = true;
+        }
+        this.block_number.loaded = "loaded";
     }
 
     virus_is_live(){
