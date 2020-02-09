@@ -20,7 +20,7 @@ contract Pathogen721{
     //    mapping (address => uint)   coughs; //<token balance
     mapping (address => uint)  DEATH_DATE;
     uint constant INFECTIOUSNESS = 3;
-    uint constant STABILITY = 10;
+    uint constant STABILITY = 5;
 
     uint public LAST_INFECTION = 0;
 

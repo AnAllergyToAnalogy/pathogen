@@ -270,15 +270,21 @@ class Site {
             site.game.contract.infectMe();
         });
 
-        _.ById("button-check");
+        // _.ById("button-check");
         _.ById("button-check").OnClick(async (e)=>{
             site.game.validate_cough(
                 _.ById("input-infect").value
             );
         });
         _.ById("button-infect").OnClick((e)=>{
-            site.game.infect()
+            site.game.infect();
+            _.ById("input-infect").value = "";
         });
+
+        _.ById("input-infect").onkeyup =
+        _.ById("input-infect").onchange = (e)=>{
+            site.game.reset_cough();
+        }
 
 
     }
@@ -371,8 +377,22 @@ class Site {
                     || (G.cough.status === "success") || (G.cough.status === "fail")
                     )&& !G.cough.checking
                 );
-                _.ById("button-infect").Show(G.cough.infectable === "okay"
+                if(G.cough.status === "success"){
+                    _.ById("button-check").SetText("Infect another");
+                }else if(G.cough.status === "fail"){
+                    _.ById("button-check").SetText("Try again");
+                }
+
+                _.ById("input-infect").Show(
+                    G.cough.status !== "submitted"
+                );
+                _.ById("input-infect").disabled = G.cough.checking;
+
+
+                _.ById("button-infect").Show(
+                    G.cough.infectable === "okay"
                     && !G.cough.checking
+                    && G.cough.status === "ready"
                 );
 
                 let message ="";

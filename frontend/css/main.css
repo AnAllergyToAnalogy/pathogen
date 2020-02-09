@@ -165,6 +165,13 @@ header{
 
     text-align: center;
 }
+.info-main p{
+    padding-bottom: 15px;
+}
+.info-main b {
+    padding-bottom: 20px;
+
+}
 
 .graph{
 
@@ -347,6 +354,9 @@ header{
 }
 .input-infect:active{
     background-color: white;
+}
+.button-infect{
+    padding-top: 5px;
 }
 
 
