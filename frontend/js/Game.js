@@ -390,7 +390,7 @@ class Game{
         }
     }
     async validate_cough(victim){
-        this.cough.victim = victim;
+        this.cough.victim = "";
         this.cough.checking = true;
         this.cough.infectable = "checking";
 
@@ -404,6 +404,7 @@ class Game{
                 this.cough.infectable = "ens_bad";
             }
         }
+        this.cough.victim = victim;
         if(this.cough.infectable === "ens_bad"){
             return;
         }

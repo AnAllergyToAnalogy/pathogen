@@ -492,25 +492,3 @@ class Site {
 
     }
 }
-
-// await web3.eth.ens.resolver("ethereum.eth")
-
-//todo: namehash (probs have to reverse engineer)
-
-// async function Reverse(address) {
-//     var lookup=address.toLowerCase().substr(2) + '.addr.reverse'
-//     var ResolverContract=await web3.eth.ens.resolver(lookup);
-//     var nh=namehash.hash(lookup);
-
-//     var name=await ResolverContract.methods.name(nh).call()
-//     return name;
-
-
-//0x217D29BB236A4a082d1999043060360e161F18f9
-//0xCa9FF2640c03A72BC2e0360c70F32F8Da9b8f9B0
-//0x238Ae7d0E1a3EF162d78534a1BA968AC139D4233
-
-// function node(address addr) public pure returns (bytes32) {
-//     return keccak256(abi.encodePacked(ADDR_REVERSE_NODE, sha3HexAddress(addr)));
-// }
-
