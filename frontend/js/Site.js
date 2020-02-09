@@ -1,8 +1,7 @@
 class Site {
     constructor() {
         var site = this;
-        // const provider_fallback = "http://127.0.0.1:8545";
-        const provider_fallback = "https://rinkeby.infura.io/v3/2d9d3459d7ef4188a43973a98b27cef7";
+        const provider_fallback = "https://mainnet.infura.io/v3/2d9d3459d7ef4188a43973a98b27cef7";
 
         let instance = new Instance(provider_fallback);
 

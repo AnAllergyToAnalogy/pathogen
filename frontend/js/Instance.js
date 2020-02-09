@@ -6,10 +6,11 @@ class Instance {
     constructor(provider_fallback){
         //addresses: {Main}
         this.provider_fallback = provider_fallback;
-        // this.provider_sockets = "wss://mainnet.infura.io/ws";
-        this.provider_sockets = "wss://rinkeby.infura.io/ws";
+        this.provider_sockets = "wss://mainnet.infura.io/ws";
+
         this.addresses = {
-            Main: "0xBe49733b42534068c1003214DFA41f0cc04D0A7D",
+            Main: "0xae26A1488c38D187ff2F52ae59158edbEDcB4069",
+            // Rinkeby: "0xBCb6BC536cbEC98EDF2F5Daf24EBBAe67348FeE7",
         }
 
         this.compiled = compiled_contract;

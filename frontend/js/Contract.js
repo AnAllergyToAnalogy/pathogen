@@ -4,7 +4,7 @@ class Contract{
         this.instances = instances;
 
         this.networkId = -1;
-        this.networkId_required = 4;
+        this.networkId_required = 1;
         this.update_networkId();
 
 
