@@ -420,6 +420,12 @@ header{
     /*position: relative;*/
 }
 
+.image-main{
+    margin-top: 20px;
+    width:50%;
+    height:50%;
+}
+
 /*Tablet*/
 @media (min-width: 600px) {
     .main{

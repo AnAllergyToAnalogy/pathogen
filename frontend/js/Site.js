@@ -273,7 +273,7 @@ class Site {
         // _.ById("button-check");
         _.ById("button-check").OnClick(async (e)=>{
             site.game.validate_cough(
-                _.ById("input-infect").value
+                _.ById("input-infect").value.trim()
             );
         });
         _.ById("button-infect").OnClick((e)=>{

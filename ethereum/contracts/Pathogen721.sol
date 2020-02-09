@@ -46,8 +46,7 @@ contract Pathogen721{
     //    METADATA VARS
     string private __name = "EtherVirus";
     string private __symbol = "2020-nEthV";
-    bytes private __uriBase = bytes("https://www.somedomain.com/tokenData/");
-
+    string private __tokenURI = "https://anallergytoanalogy.github.io/pathogen/metadata/2020-nEthV.json";
 
     //    ENUMERABLE VARS
     mapping(address => uint[]) internal OWNER_INDEX_TO_ID;
@@ -178,9 +177,9 @@ contract Pathogen721{
     function canInfect(address vector, address victim, uint _tokenId) public view returns(string memory){
         if(victim.balance == 0) return "victim_inactive";
         if(DEATH_DATE[victim] > 0 && now >= DEATH_DATE[victim]) return "victim_dead";
-        if(STRAINS[_tokenId] <= IMMUNITY[victim]) return "victim_immune";
-        if(BALANCES[victim] > 0)    return "victim_sick";
         if(now >= DEATH_DATE[vector]) return "vector_dead";
+        if(BALANCES[victim] > 0)    return "victim_sick";
+        if(STRAINS[_tokenId] <= IMMUNITY[victim]) return "victim_immune";
         if(BALANCES[vector] == 0) return "vector_healthy";
         return "okay";
     }
@@ -375,39 +374,7 @@ contract Pathogen721{
     function tokenURI(uint256 _tokenId) public view returns (string memory){
         //Note: changed visibility to public
         require(isValidToken(_tokenId),"invalid");
-
-        bytes1[10] memory charcodes;
-        charcodes[0] = "0";
-        charcodes[1] = "1";
-        charcodes[2] = "2";
-        charcodes[3] = "3";
-        charcodes[4] = "4";
-        charcodes[5] = "5";
-        charcodes[6] = "6";
-        charcodes[7] = "7";
-        charcodes[8] = "8";
-        charcodes[9] = "9";
-
-
-        uint maxLength = 78;
-        //Max length of a uint256
-        //max value-> 115792089237316195423570985008687907853269984665640564039457584007913129639935
-        bytes memory reversed = new bytes(maxLength);
-        uint i = 0;
-        while (_tokenId != 0) {
-            uint remainder = _tokenId % 10;
-            _tokenId /= 10;
-            reversed[i++] = charcodes[remainder];//byte(48 + remainder);
-        }
-        bytes memory s = new bytes(__uriBase.length + i);
-        uint j;
-        for (j = 0; j < __uriBase.length; j++) {
-            s[j] = __uriBase[j];
-        }
-        for (j = 0; j < i; j++) {
-            s[j + __uriBase.length] = reversed[i - 1 - j];
-        }
-        return string(s);
+        return __tokenURI;
     }
 
     /// @notice A descriptive name for a collection of NFTs in this contract
