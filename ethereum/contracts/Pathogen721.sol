@@ -45,7 +45,7 @@ contract Pathogen721{
 
     //    METADATA VARS
     string private __name = "EtherVirus";
-    string private __symbol = "nEv";
+    string private __symbol = "2020-nEthV";
     bytes private __uriBase = bytes("https://www.somedomain.com/tokenData/");
 
 

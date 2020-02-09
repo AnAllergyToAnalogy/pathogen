@@ -287,6 +287,7 @@ class Site {
         }
 
 
+
     }
     refresh_page(){
         let G = this.game;
@@ -445,6 +446,8 @@ class Site {
                 }
                 _.ById("readout-infect").SetText(message);
             }
+
+
             if(me_dead){
                 _.ById("dead-death-date").SetText(site.format_past_death_date(G.me.death_date));
                 _.ById("dead-strain").SetText(site.format_strain(G.me.immunity));
@@ -456,6 +459,10 @@ class Site {
                 }
             }
             if(me_healthy){
+                _.ById("me-immune").Show(G.me.immunity > 0);
+                _.ById("me-not-immune").Show(G.me.immunity === 0);
+                _.ById("healthy-strain").SetText(site.format_strain(G.me.immunity));
+
                 _.ById("button-infectMe").Show(G.infectMe.status === "ready");
                 switch(G.infectMe.status){
                     case "ready":

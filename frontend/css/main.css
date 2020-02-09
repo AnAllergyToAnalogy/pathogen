@@ -168,10 +168,6 @@ header{
 .info-main p{
     padding-bottom: 15px;
 }
-.info-main b {
-    padding-bottom: 20px;
-
-}
 
 .graph{
 
@@ -272,6 +268,16 @@ header{
 .me-subtext{
     font-size: 14px;
     line-height: 20px;
+}
+.me-immune{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+.me-immune-pad{
+    padding-bottom: 70px;
 }
 
 .status-me{
