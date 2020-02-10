@@ -17,6 +17,6 @@ What does this mean? It means the contract works just fine. Nothing will get stu
 
 There is a lesson to be learned here people:
 
-###Do not deploy projects at 3am without unit testing first.
+### Do not deploy projects at 3am without unit testing first.
  
  I have no problem admitting when I was wrong though. It is what it is.
