@@ -302,7 +302,7 @@ class Game{
         this.get_leaderboard_names();
     }
     sort_and_set_leaderboard(leaderboard){
-        leaderboard.sort(function(a,b){return a.infections < b.infections})
+        leaderboard =leaderboard.sort(function(a,b){return a.infections < b.infections});
         this.leaderboard = leaderboard.slice(0,10);
         this.trigger_leaderboard_update();
     }
